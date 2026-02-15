@@ -1,0 +1,32 @@
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './tests',
+  timeout: 60_000,
+  expect: {
+    // Allow some variance across renderers while still catching real regressions.
+    toHaveScreenshot: { maxDiffPixelRatio: 0.01, animations: 'disabled' },
+  },
+  webServer: {
+    command: 'npm run build && npx vite preview --host 127.0.0.1 --port 4173',
+    url: 'http://127.0.0.1:4173',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120_000,
+  },
+  use: {
+    baseURL: process.env.UI_BASE_URL || 'http://127.0.0.1:4173',
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+  },
+  projects: [
+    {
+      name: 'mobile-412x915',
+      use: { viewport: { width: 412, height: 915 } },
+    },
+    {
+      name: 'mobile-360x800',
+      use: { viewport: { width: 360, height: 800 } },
+    },
+  ],
+  reporter: [['list'], ['html', { open: 'never' }]],
+});
