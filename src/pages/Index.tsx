@@ -1489,10 +1489,10 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">  
             <div>  
               <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Get in Touch</p>  
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary font-bold mb-6 theme-transition">  
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary dark:text-white font-bold mb-6 theme-transition">  
                 We're Here For You  
               </h2>  
-              <p className="text-body text-lg leading-relaxed mb-10 theme-transition">  
+              <p className="text-body dark:text-white/80 text-lg leading-relaxed mb-10 theme-transition">  
                 Have questions? Need prayer? Want to learn more about our ministries? We'd love to hear from you. Reach out anytime.  
               </p>
 
@@ -1505,7 +1505,7 @@ const Index = () => {
                     </svg>  
                   </div>  
                   <div>  
-                    <h3 className="font-semibold text-primary mb-1 theme-transition">Address</h3>  
+                    <h3 className="font-semibold text-primary dark:text-white mb-1 theme-transition">Address</h3>  
                     <p className="text-burgundy-700 dark:text-white/70 theme-transition">1234 Faith Avenue, Atlanta, GA 30301</p>  
                   </div>  
                 </div>  
@@ -1517,7 +1517,7 @@ const Index = () => {
                     </svg>  
                   </div>  
                   <div>  
-                    <h3 className="font-semibold text-primary mb-1 theme-transition">Phone</h3>  
+                    <h3 className="font-semibold text-primary dark:text-white mb-1 theme-transition">Phone</h3>  
                     <p className="text-burgundy-700 dark:text-white/70 theme-transition">(404) 555-0123</p>  
                   </div>  
                 </div>  
@@ -1529,7 +1529,7 @@ const Index = () => {
                     </svg>  
                   </div>  
                   <div>  
-                    <h3 className="font-semibold text-primary mb-1 theme-transition">Email</h3>  
+                    <h3 className="font-semibold text-primary dark:text-white mb-1 theme-transition">Email</h3>  
                     <p className="text-burgundy-700 dark:text-white/70 theme-transition">info@churchname.org</p>  
                   </div>  
                 </div>  
@@ -1537,7 +1537,7 @@ const Index = () => {
 
               {/* Social Links */}  
               <div className="mt-10">  
-                <p className="font-semibold text-primary mb-4 theme-transition">Follow Us</p>  
+                <p className="font-semibold text-primary dark:text-white mb-4 theme-transition">Follow Us</p>  
                 <div className="flex gap-4">  
                   {['facebook', 'instagram', 'youtube', 'twitter'].map((social) => (  
                     <a  
