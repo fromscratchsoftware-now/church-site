@@ -1072,7 +1072,7 @@ const Index = () => {
                   className="w-full h-full object-cover"  
                 />  
               </div>  
-              <div className="absolute -bottom-6 -left-6 bg-gold-500 text-burgundy-950 p-6 rounded-2xl shadow-xl hover-lift glass">  
+              <div className="absolute -bottom-6 -left-6 bg-gold-500 dark:bg-gold-500 text-burgundy-950 p-6 rounded-2xl shadow-xl hover-lift border border-white/20">  
                 <p className="font-display text-4xl font-bold">50+</p>  
                 <p className="text-sm font-medium">Years of Faith</p>  
               </div>  

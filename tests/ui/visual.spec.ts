@@ -20,8 +20,9 @@ async function setTheme(page: any, mode: 'light' | 'dark') {
 }
 
 async function gotoPath(page: any, path: string) {
-  await page.goto(path, { waitUntil: 'domcontentloaded' });
-  await page.waitForTimeout(500);
+  // WebKit can be slower on hash navigations; give it breathing room.
+  await page.goto(path, { waitUntil: 'domcontentloaded', timeout: 120_000 });
+  await page.waitForTimeout(700);
 }
 
 async function gotoWithTheme(page: any, path: string, mode: 'light' | 'dark') {
