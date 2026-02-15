@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { SITE } from "../config/site";
 
 export default function SiteFooter({ showSocial = true }: { showSocial?: boolean }) {
   return (
@@ -10,16 +11,22 @@ export default function SiteFooter({ showSocial = true }: { showSocial?: boolean
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div>
-            <h3 className="font-display text-2xl font-bold text-white mb-4">Church Name</h3>
+            <h3 className="font-display text-2xl font-bold text-white mb-4">{SITE.name}</h3>
             <p className="text-white/60 mb-6">
-              A place where everyone belongs. Join us as we grow together in faith, love, and service.
+              {SITE.tagline} Join us as we grow together in faith, love, and service.
             </p>
             {showSocial && (
               <div className="flex gap-3">
-                {["facebook", "instagram", "youtube"].map((social) => (
+                {(["facebook", "instagram", "youtube"] as const).map((social) => (
                   <a
                     key={social}
-                    href="#"
+                    href={
+                      social === "facebook"
+                        ? SITE.links.facebook
+                        : social === "instagram"
+                          ? SITE.links.instagram
+                          : SITE.links.youtubeLive
+                    }
                     className="w-10 h-10 glass-dark hover:bg-white/20 rounded-lg flex items-center justify-center text-white transition-all duration-300 hover-lift"
                   >
                     {social === "facebook" && (
@@ -84,15 +91,15 @@ export default function SiteFooter({ showSocial = true }: { showSocial?: boolean
             <h4 className="font-semibold text-white mb-4">Service Times</h4>
             <div className="space-y-3 text-white/60">
               <p>
-                <span className="text-white">Sunday:</span> 8:00 AM, 10:30 AM, 6:00 PM
+                <span className="text-white">Sunday:</span> {SITE.serviceTimes.sunday}
               </p>
               <p>
-                <span className="text-white">Wednesday:</span> 7:00 PM Bible Study
+                <span className="text-white">Wednesday:</span> {SITE.serviceTimes.wednesday}
               </p>
               <p className="pt-2 text-sm">
-                1234 Faith Avenue
+                {SITE.address.line1}
                 <br />
-                Atlanta, GA 30301
+                {SITE.address.line2}
               </p>
             </div>
           </div>
@@ -100,11 +107,11 @@ export default function SiteFooter({ showSocial = true }: { showSocial?: boolean
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/40 text-sm">
-            © 2026 Church Name. All rights reserved.{" "}
+            © 2026 {SITE.name}. All rights reserved.{" "}
             <span className="mx-2">•</span>
             Designed by{" "}
             <a
-              href="https://fromscratchsoftware.com/"
+              href={SITE.links.website}
               target="_blank"
               rel="noreferrer"
               className="text-sky-400 hover:text-sky-300 underline underline-offset-4 transition-colors"
