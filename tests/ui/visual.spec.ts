@@ -42,6 +42,34 @@ test.describe('Mobile visual regression', () => {
     await expect(page).toHaveScreenshot('home-hero-dark.png');
   });
 
+  test('Navbar scrolled state (light/dark)', async ({ page }) => {
+    await gotoWithTheme(page, '/', 'light');
+    await page.evaluate(() => window.scrollTo(0, 220));
+    await page.waitForTimeout(250);
+    await expect(page).toHaveScreenshot('navbar-scrolled-light.png');
+
+    await gotoWithTheme(page, '/', 'dark');
+    await page.evaluate(() => window.scrollTo(0, 220));
+    await page.waitForTimeout(250);
+    await expect(page).toHaveScreenshot('navbar-scrolled-dark.png');
+  });
+
+  test('Sermons section cards on home (light/dark)', async ({ page }) => {
+    await gotoWithTheme(page, '/#sermons', 'light');
+    await expect(page).toHaveScreenshot('home-sermons-light.png');
+
+    await gotoWithTheme(page, '/#sermons', 'dark');
+    await expect(page).toHaveScreenshot('home-sermons-dark.png');
+  });
+
+  test('Events section cards on home (light/dark)', async ({ page }) => {
+    await gotoWithTheme(page, '/#events', 'light');
+    await expect(page).toHaveScreenshot('home-events-light.png');
+
+    await gotoWithTheme(page, '/#events', 'dark');
+    await expect(page).toHaveScreenshot('home-events-dark.png');
+  });
+
   test('Plan Your Visit cards (light/dark)', async ({ page }) => {
     await gotoWithTheme(page, '/#visit', 'light');
     await expect(page).toHaveScreenshot('visit-cards-light.png');
@@ -56,5 +84,21 @@ test.describe('Mobile visual regression', () => {
 
     await gotoWithTheme(page, '/#contact', 'dark');
     await expect(page).toHaveScreenshot('contact-dark.png');
+  });
+
+  test('Events page grid (light/dark)', async ({ page }) => {
+    await gotoWithTheme(page, '/events', 'light');
+    await expect(page).toHaveScreenshot('events-page-light.png');
+
+    await gotoWithTheme(page, '/events', 'dark');
+    await expect(page).toHaveScreenshot('events-page-dark.png');
+  });
+
+  test('Sermons page grid (light/dark)', async ({ page }) => {
+    await gotoWithTheme(page, '/sermons', 'light');
+    await expect(page).toHaveScreenshot('sermons-page-light.png');
+
+    await gotoWithTheme(page, '/sermons', 'dark');
+    await expect(page).toHaveScreenshot('sermons-page-dark.png');
   });
 });
