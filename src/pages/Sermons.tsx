@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { getJson, apiPath } from '../lib/api';
 
+const YOUTUBE_LIVE_URL = "https://www.youtube.com/@YourChurchChannel/live";
+
 interface Sermon {  
   title: string;  
   speaker: string;  

@@ -1,4 +1,4 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
@@ -20,12 +20,20 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'mobile-412x915',
-      use: { viewport: { width: 412, height: 915 } },
+      name: 'android-chrome',
+      use: {
+        ...devices['Pixel 7'],
+        // Ensure we run on Chromium explicitly for Android/Chrome coverage.
+        browserName: 'chromium',
+      },
     },
     {
-      name: 'mobile-360x800',
-      use: { viewport: { width: 360, height: 800 } },
+      name: 'ios-safari',
+      use: {
+        ...devices['iPhone 14'],
+        // WebKit approximates iOS Safari rendering in CI.
+        browserName: 'webkit',
+      },
     },
   ],
   reporter: [['list'], ['html', { open: 'never' }]],
