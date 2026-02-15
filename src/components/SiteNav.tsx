@@ -117,9 +117,9 @@ export function SiteNav({ variant = "overlay" }: { variant?: "overlay" | "solid"
 
   const navClass =
     variant === "solid"
-      ? "glass-dark shadow-2xl"
+      ? "bg-burgundy-950 shadow-2xl"
       : scrolled
-        ? "bg-burgundy-950/90 backdrop-blur-md shadow-2xl"
+        ? "bg-burgundy-950 shadow-2xl"
         : "bg-transparent";
 
   const baseLinkClass = `text-sm font-medium transition-all duration-300 hover:opacity-70 ${"text-white"}`;
@@ -178,7 +178,7 @@ export function SiteNav({ variant = "overlay" }: { variant?: "overlay" | "solid"
         </div>
       </div>
 
-      <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-screen glass-dark" : "max-h-0"}`}
+      <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-screen bg-burgundy-950 shadow-2xl" : "max-h-0"}`}
       >
         <div className="px-4 py-6 space-y-4">
           {SITE.nav.map((item) => (
