@@ -1097,7 +1097,7 @@ const Index = () => {
                   <img  
                     src={sermon.image}  
                     alt={sermon.title}  
-                    loading="lazy"
+                    loading={index < 3 ? "eager" : "lazy"}
                     decoding="async"
                     referrerPolicy="no-referrer"
                     onError={(e) => {
@@ -1178,7 +1178,7 @@ const Index = () => {
                       <img  
                         src={event.image}  
                         alt={event.title}  
-                        loading="lazy"
+                        loading={index < 3 ? "eager" : "lazy"}
                         decoding="async"
                         referrerPolicy="no-referrer"
                         onError={(e) => {

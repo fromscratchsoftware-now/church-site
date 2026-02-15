@@ -806,7 +806,7 @@ const Events = () => {
                           <img  
                             src={event.image}  
                             alt={event.title}  
-                            loading="lazy"
+                            loading={index < 6 ? "eager" : "lazy"}
                             decoding="async"
                             referrerPolicy="no-referrer"
                             onError={(e) => {
