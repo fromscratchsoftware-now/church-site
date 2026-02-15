@@ -915,7 +915,7 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}  
-      <section className="relative h-screen min-h-[700px] flex items-start md:items-center justify-center overflow-hidden pt-24 md:pt-0">  
+      <section className="relative h-screen min-h-[700px] flex items-start md:items-center justify-center overflow-x-hidden pt-24 md:pt-0">  
         {/* Animated Blobs */}  
         <div className="blob blob-1"></div>  
         <div className="blob blob-2"></div>  
