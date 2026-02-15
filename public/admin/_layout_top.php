@@ -24,7 +24,7 @@ $title = $title ?? 'Admin';
       .row > * { flex: 1; }
       .card { border: 1px solid rgba(127,127,127,0.25); border-radius: 12px; padding: 16px; margin: 16px 0; }
       .btn { display:inline-block; padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(127,127,127,0.35); background: rgba(127,127,127,0.12); cursor: pointer; text-decoration:none; }
-      .btn.primary { background: #5c1229; color: #fff; border-color: #5c1229; }
+      .btn.primary { background: #12264a; color: #fff; border-color: #12264a; }
       .btn.danger { background: #b91c1c; color: #fff; border-color: #b91c1c; }
       .muted { opacity: 0.75; }
       .flash { padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(127,127,127,0.25); margin: 12px 0; }

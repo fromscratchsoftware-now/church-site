@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { SITE } from "../config/site";
 
 function ChurchLogo({ className = "", light = false }: { className?: string; light?: boolean }) {
-  const primaryColor = light ? "#ffffff" : "#5c1229";
+  const primaryColor = light ? "#ffffff" : "#12264a";
   const secondaryColor = light ? "#fef9e7" : "#f0b429";
 
   return (
