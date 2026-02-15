@@ -473,7 +473,14 @@ const Testimonials = () => {
                       <img  
                         src={testimonial.image}  
                         alt={testimonial.name}  
-                        className="w-14 h-14 rounded-full object-cover ring-2 ring-gold-400"  
+                        loading="lazy"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          e.currentTarget.style.opacity = '0.3';
+                          e.currentTarget.style.filter = 'grayscale(1)';
+                        }}
+                        className="w-14 h-14 rounded-full object-cover ring-2 ring-gold-400 bg-burgundy-100 dark:bg-burgundy-900/30"  
                       />  
                       <div className="flex-1">  
                         <h3 className="font-display text-lg font-bold text-primary theme-transition">  

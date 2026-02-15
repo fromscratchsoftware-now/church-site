@@ -223,10 +223,17 @@ const EventRegistrationModal = ({ event, isOpen, onClose }: { event: Event | nul
         </button>
 
         {/* Event Header */}  
-        <div className="relative h-48 overflow-hidden">  
+        <div className="relative h-48 overflow-hidden bg-burgundy-900/40">  
           <img  
             src={event.image}  
             alt={event.title}  
+            loading="lazy"
+            decoding="async"
+            referrerPolicy="no-referrer"
+            onError={(e) => {
+              e.currentTarget.style.opacity = '0.15';
+              e.currentTarget.style.filter = 'grayscale(1)';
+            }}
             className="w-full h-full object-cover"  
           />  
           <div className="absolute inset-0 bg-gradient-to-t from-burgundy-950/90 to-transparent" />  
@@ -795,10 +802,17 @@ const Events = () => {
                     <div className="flip-card-inner h-full">  
                       {/* Front of Card */}  
                       <div className="flip-card-front group relative glass dark:bg-burgundy-900/20 rounded-2xl overflow-hidden cursor-pointer hover-lift">  
-                        <div className="aspect-[4/3] overflow-hidden">  
+                        <div className="aspect-[4/3] overflow-hidden bg-burgundy-100 dark:bg-burgundy-900/30">  
                           <img  
                             src={event.image}  
                             alt={event.title}  
+                            loading="lazy"
+                            decoding="async"
+                            referrerPolicy="no-referrer"
+                            onError={(e) => {
+                              e.currentTarget.style.opacity = '0.15';
+                              e.currentTarget.style.filter = 'grayscale(1)';
+                            }}
                             className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105"  
                           />  
                           <div className="absolute inset-0 bg-gradient-to-t from-burgundy-950/80 to-transparent" />  

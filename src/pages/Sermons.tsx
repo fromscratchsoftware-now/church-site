@@ -477,10 +477,17 @@ const Sermons = () => {
                     className="group cursor-pointer hover-lift card-3d theme-transition animate-fade-in-up"  
                     style={{ animationDelay: `${(index % 9) * 100}ms` }}  
                   >  
-                    <div className="relative aspect-video rounded-2xl overflow-hidden mb-5 shadow-lg">  
+                    <div className="relative aspect-video rounded-2xl overflow-hidden mb-5 shadow-lg bg-burgundy-100 dark:bg-burgundy-900/30">  
                       <img  
                         src={sermon.image}  
                         alt={sermon.title}  
+                        loading="lazy"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          e.currentTarget.style.opacity = '0.15';
+                          e.currentTarget.style.filter = 'grayscale(1)';
+                        }}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"  
                       />  
                       <div className="absolute inset-0 bg-gradient-to-t from-burgundy-950/80 to-transparent group-hover:from-burgundy-950/60 transition-all duration-300" />  
