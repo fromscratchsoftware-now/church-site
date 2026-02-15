@@ -120,13 +120,7 @@ export default function SiteFooter({ showSocial = true }: { showSocial?: boolean
             </a>
           </p>
           <div className="flex gap-6 text-sm">
-            <a href={
-                      social === "facebook"
-                        ? SITE.links.facebook
-                        : social === "instagram"
-                          ? SITE.links.instagram
-                          : SITE.links.youtubeLive
-                    } className="text-white/40 hover:text-white/60 transition-colors">
+            <a href="#" className="text-white/40 hover:text-white/60 transition-colors">
               Privacy Policy
             </a>
             <a href="#" className="text-white/40 hover:text-white/60 transition-colors">
