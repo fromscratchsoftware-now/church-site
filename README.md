@@ -1,8 +1,17 @@
 # Church Website (Vite + React + PHP + MySQL)
 
-Deployed at: `https://church.fromscratchsoftware.net/1/`
+Primary (SiteGround) deploy: `https://church.fromscratchsoftware.net/1/`
+Vercel preview: `https://church-site-mauve.vercel.app/`
 
 This repo is a Vite/React frontend that reads/writes data via a small PHP (PDO) JSON API deployed alongside the static build. The database is MySQL (SiteGround).
+
+## Vercel Notes (Preview)
+
+Vercel is used as a fast **frontend preview** only.
+
+- Vercel **does not run PHP**, so `public/api/*.php` and `public/admin/*` will **not** work there.
+- The React app uses fallback data when the API is unavailable, so the UI still works.
+- SPA routing on Vercel requires `vercel.json` rewrites (already included).
 
 ## Project Structure
 
