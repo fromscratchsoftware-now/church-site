@@ -1291,6 +1291,10 @@ const Index = () => {
                   href="#"  
                   className="bg-burgundy-950 hover:bg-burgundy-900 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:shadow-xl text-center hover-lift"  
                 >  
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 opacity-40 dark:opacity-20 bg-[url('/images/patterns/card-pattern.svg')] bg-repeat"
+                />
                   Give Online  
                 </a>  
                 <a  
@@ -1390,9 +1394,13 @@ const Index = () => {
             ].map((item, index) => (  
               <div
                 key={index}
-                className="text-center p-6 rounded-2xl glass dark:bg-burgundy-900/20 hover:shadow-lg transition-all duration-300 hover-lift theme-transition animate-scale-in"
+                className="relative overflow-hidden text-center p-6 rounded-2xl glass dark:bg-burgundy-900/20 hover:shadow-lg transition-all duration-300 hover-lift theme-transition animate-scale-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 opacity-40 dark:opacity-20 bg-[url('/images/patterns/card-pattern.svg')] bg-repeat"
+                />
                 <div className="w-16 h-16 bg-burgundy-100 dark:bg-burgundy-800 rounded-2xl flex items-center justify-center mx-auto mb-5 text-burgundy-700 dark:text-gold-400 theme-transition">  
                   {item.icon}  
                 </div>  
