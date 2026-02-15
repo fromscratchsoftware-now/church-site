@@ -1231,7 +1231,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials Carousel Section */}  
-      <section id="testimonials" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-950/55 relative gradient-mesh theme-transition">  
+      <section id="testimonials" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-900/60 relative gradient-mesh theme-transition">  
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="text-center mb-16">  
             <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Stories of Faith</p>  
@@ -1484,7 +1484,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}  
-      <section id="contact" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-950/55 relative gradient-mesh theme-transition">  
+      <section id="contact" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-900/60 relative gradient-mesh theme-transition">  
         <div className="max-w-7xl mx-auto px-4 transition-all duration-1000 opacity-100 translate-y-0">  
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">  
             <div>  
