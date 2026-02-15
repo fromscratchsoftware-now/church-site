@@ -350,28 +350,28 @@ const TestimonialCarousel = () => {
     {  
       name: "Sarah Johnson",  
       role: "Member since 2015",  
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",  
+      image: "/images/unsplash/1494790108377-be9c29b29330-w400.jpg",  
       quote: "This church has been my spiritual home for years. The community is warm, the teaching is biblical, and I've grown so much in my faith here.",  
       rating: 5  
     },  
     {  
       name: "Michael Thompson",  
       role: "Youth Ministry Volunteer",  
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",  
+      image: "/images/unsplash/1507003211169-0a1dd7228f2d-w400.jpg",  
       quote: "Serving in the youth ministry has been life-changing. Watching young people encounter God's love and grow in their faith is incredibly rewarding.",  
       rating: 5  
     },  
     {  
       name: "Emily Davis",  
       role: "New Member",  
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80",  
+      image: "/images/unsplash/1438761681033-6461ffad8d80-w400.jpg",  
       quote: "As a new member, I was welcomed with open arms. The genuine love and care from everyone here made me feel like I belonged from day one.",  
       rating: 5  
     },  
     {  
       name: "James Wilson",  
       role: "Worship Team",  
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",  
+      image: "/images/unsplash/1500648767791-00dcc994a43e-w400.jpg",  
       quote: "Being part of the worship team has deepened my relationship with God. The way our church community worships together is truly powerful.",  
       rating: 5  
     }  
@@ -392,7 +392,7 @@ const TestimonialCarousel = () => {
           rows.map((r) => ({
             name: r.full_name,
             role: r.title || 'Member',
-            image: r.avatar_url || 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80',
+            image: r.avatar_url || '/images/unsplash/1494790108377-be9c29b29330-w400.jpg',
             quote: r.quote,
             rating: 5,
           })),
@@ -642,42 +642,42 @@ const Index = () => {
       date: "Feb 21-23",  
       time: "7:00 PM",  
       category: "Youth",  
-      image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=80"  
+      image: "/images/unsplash/1523580494863-6f3031224c94-w600.jpg"  
     },  
     {  
       title: "Women's Prayer Breakfast",  
       date: "Feb 28",  
       time: "9:00 AM",  
       category: "Women",  
-      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80"  
+      image: "/images/unsplash/1529156069898-49953e39b3ac-w600.jpg"  
     },  
     {  
       title: "Community Outreach Day",  
       date: "Mar 1",  
       time: "10:00 AM",  
       category: "Outreach",  
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80"  
+      image: "/images/unsplash/1559027615-cd4628902d4a-w600.jpg"  
     },  
     {  
       title: "Marriage Enrichment Seminar",  
       date: "Mar 7",  
       time: "6:30 PM",  
       category: "Couples",  
-      image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80"  
+      image: "/images/unsplash/1511285560929-80b456fea0bc-w600.jpg"  
     },  
     {  
       title: "Choir Anniversary Concert",  
       date: "Mar 14",  
       time: "5:00 PM",  
       category: "Music",  
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80"  
+      image: "/images/unsplash/1493225457124-a3eb161ffa5f-w600.jpg"  
     },  
     {  
       title: "Men's Fellowship Breakfast",  
       date: "Mar 21",  
       time: "8:00 AM",  
       category: "Men",  
-      image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=600&q=80"  
+      image: "/images/unsplash/1528605248644-14dd04022da1-w600.jpg"  
     }  
   ];
 
@@ -687,21 +687,21 @@ const Index = () => {
       title: "Walking in Purpose",  
       speaker: "Pastor James Williams",  
       date: "February 9, 2026",  
-      image: "https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&q=80",  
+      image: "/images/unsplash/1507692049790-de58290a4334-w600.jpg",  
       duration: "45 min"  
     },  
     {  
       title: "The Power of Prayer",  
       speaker: "Minister Sarah Johnson",  
       date: "February 2, 2026",  
-      image: "https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=600&q=80",  
+      image: "/images/unsplash/1544027993-37dbfe43562a-w600.jpg",  
       duration: "38 min"  
     },  
     {  
       title: "Faith Over Fear",  
       speaker: "Pastor James Williams",  
       date: "January 26, 2026",  
-      image: "https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=600&q=80",  
+      image: "/images/unsplash/1504052434569-70ad5836ab65-w600.jpg",  
       duration: "42 min"  
     }  
   ]);
@@ -722,7 +722,7 @@ const Index = () => {
                 date: d ? d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'TBD',
                 time: d ? d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }) : 'TBD',
                 category: e.category || 'Upcoming',
-                image: e.image_url || 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1920&q=80',
+                image: e.image_url || '/images/unsplash/1505373877841-8d25f7d46678-w1200.jpg',
               };
             }),
           );
@@ -740,7 +740,7 @@ const Index = () => {
                 title: s.title,
                 speaker: s.speaker || 'Church Name',
                 date: d ? d.toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' }) : '',
-                image: s.thumbnail_url || 'https://images.unsplash.com/photo-1507692049790-de58290a4334?w=600&q=80',
+                image: s.thumbnail_url || '/images/unsplash/1507692049790-de58290a4334-w600.jpg',
                 duration: minutes ? `${minutes} min` : '',
               };
             }),
@@ -930,7 +930,7 @@ const Index = () => {
         {/* Image Background with Parallax */}  
         <div ref={heroRef} className="absolute inset-0 parallax">  
           <img  
-            src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1920&q=80"  
+            src="/images/unsplash/1438232992991-995b7058bbb3-w1200.jpg"  
             alt="Church worship"  
             className="w-full h-full object-cover"  
           />  
@@ -1063,7 +1063,7 @@ const Index = () => {
             <div className={`relative ${isVisible('about') ? 'animate-slide-in-right' : ''}`}>  
               <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl image-reveal hover-lift">  
                 <img  
-                  src="https://images.unsplash.com/photo-1609234656388-0ff363383899?w=800&q=80"  
+                  src="/images/unsplash/1609234656388-0ff363383899-w800.jpg"  
                   alt="Church community gathering"  
                   className="w-full h-full object-cover"  
                 />  

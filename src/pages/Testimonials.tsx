@@ -126,7 +126,7 @@ const Testimonials = () => {
       name: "Sarah Johnson",  
       role: "Member since 2015",  
       category: "Long-time Members",  
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",  
+      image: "/images/unsplash/1494790108377-be9c29b29330-w400.jpg",  
       quote: "This church has been my spiritual home for years. The community is warm, the teaching is biblical, and I've grown so much in my faith here. Every Sunday feels like coming home to family.",  
       rating: 5,  
       date: "January 2026"  
@@ -135,7 +135,7 @@ const Testimonials = () => {
       name: "Michael Thompson",  
       role: "Youth Ministry Volunteer",  
       category: "Volunteers",  
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",  
+      image: "/images/unsplash/1507003211169-0a1dd7228f2d-w400.jpg",  
       quote: "Serving in the youth ministry has been life-changing. Watching young people encounter God's love and grow in their faith is incredibly rewarding. This church equipped me to serve effectively.",  
       rating: 5,  
       date: "December 2025"  
@@ -144,7 +144,7 @@ const Testimonials = () => {
       name: "Emily Davis",  
       role: "New Member",  
       category: "New Members",  
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80",  
+      image: "/images/unsplash/1438761681033-6461ffad8d80-w400.jpg",  
       quote: "As a new member, I was welcomed with open arms. The genuine love and care from everyone here made me feel like I belonged from day one. I'm so grateful to have found this church family.",  
       rating: 5,  
       date: "February 2026"  
@@ -153,7 +153,7 @@ const Testimonials = () => {
       name: "James Wilson",  
       role: "Worship Team Leader",  
       category: "Ministry Leaders",  
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",  
+      image: "/images/unsplash/1500648767791-00dcc994a43e-w400.jpg",  
       quote: "Being part of the worship team has deepened my relationship with God. The way our church community worships together is truly powerful. It's an honor to lead others into God's presence.",  
       rating: 5,  
       date: "November 2025"  
@@ -162,7 +162,7 @@ const Testimonials = () => {
       name: "Maria Rodriguez",  
       role: "Small Group Leader",  
       category: "Ministry Leaders",  
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",  
+      image: "/images/unsplash/1580489944761-15a19d654956-w400.jpg",  
       quote: "Leading a small group has transformed my walk with Christ. The deep connections and authentic community we've built are priceless. This church truly values discipleship and spiritual growth.",  
       rating: 5,  
       date: "October 2025"  
@@ -171,7 +171,7 @@ const Testimonials = () => {
       name: "David Chen",  
       role: "Member since 2018",  
       category: "Long-time Members",  
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80",  
+      image: "/images/unsplash/1506794778202-cad84cf45f1d-w400.jpg",  
       quote: "The biblical teaching here is solid and practical. I've learned to apply God's Word to my daily life. The pastoral care and support during difficult times has been invaluable to me and my family.",  
       rating: 5,  
       date: "September 2025"  
@@ -180,7 +180,7 @@ const Testimonials = () => {
       name: "Jessica Taylor",  
       role: "Youth Group Member",  
       category: "Youth",  
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80",  
+      image: "/images/unsplash/1534528741775-53994a69daeb-w400.jpg",  
       quote: "The youth ministry here is amazing! I've made lifelong friends and my faith has grown stronger. The youth leaders genuinely care about us and create a space where we can be authentic.",  
       rating: 5,  
       date: "January 2026"  
@@ -189,7 +189,7 @@ const Testimonials = () => {
       name: "Robert Martinez",  
       role: "Outreach Volunteer",  
       category: "Volunteers",  
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",  
+      image: "/images/unsplash/1472099645785-5658abf4ff4e-w400.jpg",  
       quote: "Serving in community outreach opened my eyes to God's heart for the hurting. This church doesn't just talk about loving others—we actively live it out. It's changed my perspective on everything.",  
       rating: 5,  
       date: "December 2025"  
@@ -198,7 +198,7 @@ const Testimonials = () => {
       name: "Amanda White",  
       role: "New Member",  
       category: "New Members",  
-      image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&q=80",  
+      image: "/images/unsplash/1487412720507-e7ab37603c6f-w400.jpg",  
       quote: "After visiting many churches, I finally found my home here. The worship is authentic, the preaching is powerful, and the people are genuinely kind. I'm excited about my spiritual journey ahead.",  
       rating: 5,  
       date: "February 2026"  
@@ -207,7 +207,7 @@ const Testimonials = () => {
       name: "Christopher Lee",  
       role: "Men's Ministry Leader",  
       category: "Ministry Leaders",  
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80",  
+      image: "/images/unsplash/1519085360753-af0119f7cbe7-w400.jpg",  
       quote: "The men's ministry has helped me become a better husband, father, and follower of Christ. The accountability and brotherhood I've found here is life-changing. Iron sharpens iron.",  
       rating: 5,  
       date: "November 2025"  
@@ -216,7 +216,7 @@ const Testimonials = () => {
       name: "Nicole Brown",  
       role: "Children's Ministry Volunteer",  
       category: "Volunteers",  
-      image: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&q=80",  
+      image: "/images/unsplash/1489424731084-a5d8b219a5bb-w400.jpg",  
       quote: "Working with kids in children's ministry is pure joy! Seeing their faces light up when they learn about Jesus reminds me why I serve. This church invests heavily in the next generation.",  
       rating: 5,  
       date: "October 2025"  
@@ -225,7 +225,7 @@ const Testimonials = () => {
       name: "Brandon Scott",  
       role: "Youth Group Member",  
       category: "Youth",  
-      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&q=80",  
+      image: "/images/unsplash/1492562080023-ab3db95bfbce-w400.jpg",  
       quote: "The youth group helped me through some really tough times. I found real friends who share my faith and leaders who actually listen. This place has shaped who I am today.",  
       rating: 5,  
       date: "December 2025"  
@@ -234,7 +234,7 @@ const Testimonials = () => {
       name: "Rachel Green",  
       role: "Member since 2012",  
       category: "Long-time Members",  
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80",  
+      image: "/images/unsplash/1544005313-94ddf0286df2-w400.jpg",  
       quote: "Over a decade here and my love for this church only grows. Through seasons of joy and hardship, this community has been constant. The friendships I've made are treasures I'll carry forever.",  
       rating: 5,  
       date: "September 2025"  
@@ -243,7 +243,7 @@ const Testimonials = () => {
       name: "Marcus Johnson",  
       role: "Music Ministry",  
       category: "Ministry Leaders",  
-      image: "https://images.unsplash.com/photo-1503443207922-dff7d543fd0e?w=400&q=80",  
+      image: "/images/unsplash/1503443207922-dff7d543fd0e-w400.jpg",  
       quote: "Using my musical gifts to worship God here has been the greatest privilege. The creative freedom and spiritual depth of our music ministry creates an atmosphere where God's presence is tangible.",  
       rating: 5,  
       date: "January 2026"  
@@ -252,7 +252,7 @@ const Testimonials = () => {
       name: "Olivia Martinez",  
       role: "New Member",  
       category: "New Members",  
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=80",  
+      image: "/images/unsplash/1517841905240-472988babdf9-w400.jpg",  
       quote: "I was hesitant about joining a church, but this community made it easy. No judgment, just love and acceptance. I'm learning what it really means to follow Jesus in a supportive environment.",  
       rating: 5,  
       date: "February 2026"  
@@ -277,7 +277,7 @@ const Testimonials = () => {
               name: r.full_name,
               role: r.title || 'Member',
               category: 'All',
-              image: r.avatar_url || 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80',
+              image: r.avatar_url || '/images/unsplash/1494790108377-be9c29b29330-w400.jpg',
               quote: r.quote,
               rating: 5,
               date: created ? created.toLocaleDateString(undefined, { month: 'long', year: 'numeric' }) : '',
@@ -392,7 +392,7 @@ const Testimonials = () => {
           
         <div className="absolute inset-0">  
           <img  
-            src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1920&q=80"  
+            src="/images/unsplash/1511632765486-a01980e01a18-w1200.jpg"  
             alt="Community testimonials"  
             className="w-full h-full object-cover"  
           />  

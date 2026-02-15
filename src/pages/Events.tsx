@@ -469,7 +469,7 @@ const Events = () => {
       category: "Youth",  
       status: "upcoming",  
       location: "Main Sanctuary",  
-      image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=80",  
+      image: "/images/unsplash/1523580494863-6f3031224c94-w600.jpg",  
       description: "Three nights of powerful worship, inspiring messages, and life-changing encounters with God designed specifically for youth."  
     },  
     {  
@@ -479,7 +479,7 @@ const Events = () => {
       category: "Women",  
       status: "upcoming",  
       location: "Fellowship Hall",  
-      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80",  
+      image: "/images/unsplash/1529156069898-49953e39b3ac-w600.jpg",  
       description: "Join us for a morning of prayer, worship, and fellowship as we seek God's presence together."  
     },  
     {  
@@ -489,7 +489,7 @@ const Events = () => {
       category: "Outreach",  
       status: "upcoming",  
       location: "City Park",  
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&q=80",  
+      image: "/images/unsplash/1559027615-cd4628902d4a-w600.jpg",  
       description: "Serve our community with acts of kindness, free food distribution, and sharing the love of Christ."  
     },  
     {  
@@ -499,7 +499,7 @@ const Events = () => {
       category: "Men",  
       status: "upcoming",  
       location: "Conference Room",  
-      image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80",  
+      image: "/images/unsplash/1511285560929-80b456fea0bc-w600.jpg",  
       description: "Strengthen your marriage with biblical principles, practical tools, and meaningful connection time."  
     },  
     {  
@@ -509,7 +509,7 @@ const Events = () => {
       category: "Worship",  
       status: "upcoming",  
       location: "Main Sanctuary",  
-      image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80",  
+      image: "/images/unsplash/1493225457124-a3eb161ffa5f-w600.jpg",  
       description: "Celebrate 25 years of powerful worship with special guests, testimonies, and an unforgettable musical experience."  
     },  
     {  
@@ -519,7 +519,7 @@ const Events = () => {
       category: "Men",  
       status: "upcoming",  
       location: "Fellowship Hall",  
-      image: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=600&q=80",  
+      image: "/images/unsplash/1528605248644-14dd04022da1-w600.jpg",  
       description: "Men, join us for food, fellowship, and encouragement as we grow together in faith and brotherhood."  
     },  
     {  
@@ -529,7 +529,7 @@ const Events = () => {
       category: "Worship",  
       status: "upcoming",  
       location: "Outdoor Pavilion",  
-      image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=600&q=80",  
+      image: "/images/unsplash/1501594907352-04cda38ebc29-w600.jpg",  
       description: "Celebrate the resurrection of Jesus with an outdoor sunrise service followed by breakfast."  
     },  
     {  
@@ -539,7 +539,7 @@ const Events = () => {
       category: "Women",  
       status: "upcoming",  
       location: "Main Sanctuary",  
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80",  
+      image: "/images/unsplash/1573497019940-1c28c88b4f3e-w600.jpg",  
       description: "Two days of worship, powerful teaching, and life-changing ministry for women of all ages."  
     },  
     {  
@@ -549,7 +549,7 @@ const Events = () => {
       category: "Youth",  
       status: "upcoming",  
       location: "Camp Retreat Center",  
-      image: "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=600&q=80",  
+      image: "/images/unsplash/1478131143081-80f7f84ca84d-w600.jpg",  
       description: "A week of outdoor adventure, spiritual growth, and unforgettable memories at our annual youth camp."  
     },  
     {  
@@ -559,7 +559,7 @@ const Events = () => {
       category: "Outreach",  
       status: "upcoming",  
       location: "Main Sanctuary",  
-      image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&q=80",  
+      image: "/images/unsplash/1488521787991-ed7bbaae773c-w600.jpg",  
       description: "Hear inspiring testimonies from missionaries and learn how you can support global missions."  
     },  
     {  
@@ -569,7 +569,7 @@ const Events = () => {
       category: "Worship",  
       status: "upcoming",  
       location: "Main Sanctuary",  
-      image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&q=80",  
+      image: "/images/unsplash/1470229722913-7c0e2dbbafd3-w600.jpg",  
       description: "An evening dedicated to worship, prayer, and encountering God's presence together."  
     },  
     {  
@@ -579,7 +579,7 @@ const Events = () => {
       category: "Youth",  
       status: "upcoming",  
       location: "Main Sanctuary",  
-      image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&q=80",  
+      image: "/images/unsplash/1497633762265-9d179a990aa6-w600.jpg",  
       description: "Pray for students, teachers, and families as we prepare for the new school year."  
     }  
   ];
@@ -602,7 +602,7 @@ const Events = () => {
             category: r.category || 'Upcoming',
             status: dt.status,
             location: r.location_name || 'TBD',
-            image: r.image_url || 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1920&q=80',
+            image: r.image_url || '/images/unsplash/1505373877841-8d25f7d46678-w1200.jpg',
             description: r.description || '',
           };
         });
@@ -737,7 +737,7 @@ const Events = () => {
           
         <div className="absolute inset-0">  
           <img  
-            src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1920&q=80"  
+            src="/images/unsplash/1505373877841-8d25f7d46678-w1200.jpg"  
             alt="Church events"  
             className="w-full h-full object-cover"  
           />  
