@@ -1030,7 +1030,7 @@ const Index = () => {
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('about') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">  
             <div className={`${isVisible('about') ? 'animate-slide-in-left' : ''}`}>  
-              <p className="text-burgundy-600 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Our Story</p>  
+              <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Our Story</p>  
               <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary font-bold mb-6 theme-transition">  
                 A Place Where Everyone Belongs  
               </h2>  
@@ -1085,7 +1085,7 @@ const Index = () => {
       <section id="sermons" className="scroll-mt-40 py-24 lg:py-32 bg-white dark:bg-burgundy-950 relative overflow-hidden theme-transition">  
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('sermons') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="text-center mb-16">  
-            <p className="text-burgundy-600 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Latest Messages</p>  
+            <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Latest Messages</p>  
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary font-bold mb-6 theme-transition">  
               Inspiring Sermons  
             </h2>  
@@ -1122,7 +1122,7 @@ const Index = () => {
                     {sermon.duration}  
                   </span>  
                 </div>  
-                <p className="text-burgundy-600 dark:text-gold-400 text-sm font-medium mb-2">{sermon.date}</p>  
+                <p className="text-burgundy-800 dark:text-gold-400 text-sm font-medium mb-2">{sermon.date}</p>  
                 <h3 className="font-display text-xl font-semibold text-primary mb-2 group-hover:text-burgundy-700 dark:group-hover:text-gold-400 transition-colors theme-transition">  
                   {sermon.title}  
                 </h3>  
@@ -1234,7 +1234,7 @@ const Index = () => {
       <section id="testimonials" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-950 relative gradient-mesh theme-transition">  
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="text-center mb-16">  
-            <p className="text-burgundy-600 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Stories of Faith</p>  
+            <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Stories of Faith</p>  
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary font-bold mb-6 theme-transition">  
               Member Testimonials  
             </h2>  
@@ -1347,7 +1347,7 @@ const Index = () => {
       <section id="visit" className="scroll-mt-40 py-24 lg:py-32 bg-white dark:bg-charcoal relative gradient-mesh theme-transition">  
         <div className="max-w-7xl mx-auto px-4 transition-all duration-1000 opacity-100 translate-y-0">  
           <div className="text-center mb-16">  
-            <p className="text-burgundy-600 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">We'd Love to Meet You</p>  
+            <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">We'd Love to Meet You</p>  
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary font-bold mb-6 theme-transition">  
               Plan Your Visit  
             </h2>  
@@ -1484,11 +1484,11 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}  
-      <section id="contact" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-950 relative gradient-mesh theme-transition">  
+      <section id="contact" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-950/85 relative gradient-mesh theme-transition">  
         <div className="max-w-7xl mx-auto px-4 transition-all duration-1000 opacity-100 translate-y-0">  
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">  
             <div>  
-              <p className="text-burgundy-600 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Get in Touch</p>  
+              <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Get in Touch</p>  
               <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary font-bold mb-6 theme-transition">  
                 We're Here For You  
               </h2>  
@@ -1506,7 +1506,7 @@ const Index = () => {
                   </div>  
                   <div>  
                     <h3 className="font-semibold text-primary mb-1 theme-transition">Address</h3>  
-                    <p className="text-muted theme-transition">1234 Faith Avenue, Atlanta, GA 30301</p>  
+                    <p className="text-burgundy-700 dark:text-white/70 theme-transition">1234 Faith Avenue, Atlanta, GA 30301</p>  
                   </div>  
                 </div>  
                   
@@ -1518,7 +1518,7 @@ const Index = () => {
                   </div>  
                   <div>  
                     <h3 className="font-semibold text-primary mb-1 theme-transition">Phone</h3>  
-                    <p className="text-muted theme-transition">(404) 555-0123</p>  
+                    <p className="text-burgundy-700 dark:text-white/70 theme-transition">(404) 555-0123</p>  
                   </div>  
                 </div>  
                   
@@ -1530,7 +1530,7 @@ const Index = () => {
                   </div>  
                   <div>  
                     <h3 className="font-semibold text-primary mb-1 theme-transition">Email</h3>  
-                    <p className="text-muted theme-transition">info@churchname.org</p>  
+                    <p className="text-burgundy-700 dark:text-white/70 theme-transition">info@churchname.org</p>  
                   </div>  
                 </div>  
               </div>
@@ -1573,7 +1573,7 @@ const Index = () => {
               {/* Contact Form */}  
               <div className="mt-12 bg-white/95 dark:bg-white/5 rounded-3xl p-6 sm:p-8 shadow-xl hover-lift theme-transition">  
                 <h3 className="font-display text-2xl font-bold text-primary dark:text-white mb-2 theme-transition">Send a Message</h3>  
-                <p className="text-muted mb-6 theme-transition">We will respond as soon as possible.</p>  
+                <p className="text-burgundy-700 dark:text-white/70 mb-6 theme-transition">We will respond as soon as possible.</p>  
                 <form onSubmit={submitContact} className="space-y-4">  
                   <input
                     type="text"
