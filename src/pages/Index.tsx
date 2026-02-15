@@ -1026,18 +1026,18 @@ const Index = () => {
       </section>
 
       {/* About Section */}  
-      <section id="about" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-charcoal relative overflow-hidden gradient-mesh theme-transition">  
+      <section id="about" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-charcoal relative overflow-hidden gradient-mesh theme-transition dark:text-white/80">  
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('about') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">  
             <div className={`${isVisible('about') ? 'animate-slide-in-left' : ''}`}>  
               <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Our Story</p>  
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary font-bold mb-6 theme-transition">  
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary dark:text-white font-bold mb-6 theme-transition">  
                 A Place Where Everyone Belongs  
               </h2>  
-              <p className="text-body text-lg leading-relaxed mb-6 theme-transition">  
+              <p className="text-body dark:text-white/80 text-lg leading-relaxed mb-6 theme-transition">  
                 For over 50 years, Church Name has been a beacon of hope in our community. We believe in the power of authentic worship, meaningful connections, and serving others with the love of Christ.  
               </p>  
-              <p className="text-body text-lg leading-relaxed mb-8 theme-transition">  
+              <p className="text-body dark:text-white/80 text-lg leading-relaxed mb-8 theme-transition">  
                 Whether you're taking your first steps in faith or you've been walking with God for decades, there's a place for you here. Come as you are and discover the life-changing power of God's grace.  
               </p>  
                 
@@ -1045,15 +1045,15 @@ const Index = () => {
               <div className="grid grid-cols-3 gap-6 mb-8">  
                 <div className="text-center p-4 glass dark:bg-burgundy-900/20 rounded-2xl hover-lift theme-transition">  
                   <AnimatedCounter end={50} suffix="+" />  
-                  <p className="text-sm text-muted mt-2 theme-transition">Years Serving</p>  
+                  <p className="text-sm text-muted dark:text-white/70 mt-2 theme-transition">Years Serving</p>  
                 </div>  
                 <div className="text-center p-4 glass dark:bg-burgundy-900/20 rounded-2xl hover-lift theme-transition">  
                   <AnimatedCounter end={1200} suffix="+" />  
-                  <p className="text-sm text-muted mt-2 theme-transition">Members</p>  
+                  <p className="text-sm text-muted dark:text-white/70 mt-2 theme-transition">Members</p>  
                 </div>  
                 <div className="text-center p-4 glass dark:bg-burgundy-900/20 rounded-2xl hover-lift theme-transition">  
                   <AnimatedCounter end={30} suffix="+" />  
-                  <p className="text-sm text-muted mt-2 theme-transition">Ministries</p>  
+                  <p className="text-sm text-muted dark:text-white/70 mt-2 theme-transition">Ministries</p>  
                 </div>  
               </div>  
                 
