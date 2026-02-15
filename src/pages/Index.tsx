@@ -1231,14 +1231,14 @@ const Index = () => {
       </section>
 
       {/* Testimonials Carousel Section */}  
-      <section id="testimonials" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-950 relative gradient-mesh theme-transition">  
+      <section id="testimonials" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-950/75 relative gradient-mesh theme-transition">  
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="text-center mb-16">  
             <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Stories of Faith</p>  
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary font-bold mb-6 theme-transition">  
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary dark:text-white font-bold mb-6 theme-transition">  
               Member Testimonials  
             </h2>  
-            <p className="text-body text-lg max-w-2xl mx-auto theme-transition">  
+            <p className="text-body dark:text-white/80 text-lg max-w-2xl mx-auto theme-transition">  
               Hear from our community about how God is working in their lives.  
             </p>  
           </div>
@@ -1484,7 +1484,7 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}  
-      <section id="contact" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-950/85 relative gradient-mesh theme-transition">  
+      <section id="contact" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-950/75 relative gradient-mesh theme-transition">  
         <div className="max-w-7xl mx-auto px-4 transition-all duration-1000 opacity-100 translate-y-0">  
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">  
             <div>  
@@ -1581,7 +1581,7 @@ const Index = () => {
                     value={contactForm.fullName}
                     onChange={(e) => setContactForm((p) => ({ ...p, fullName: e.target.value }))}
                     placeholder="Full Name"
-                    className="w-full px-5 py-4 bg-white dark:bg-white/10 border border-burgundy-300/60 dark:border-white/20 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/60 focus:border-gold-400 focus:outline-none transition-colors"
+                    className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-300/60 dark:border-white/30 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
                   />
                   <div className="grid sm:grid-cols-2 gap-4">
                     <input
@@ -1589,14 +1589,14 @@ const Index = () => {
                       value={contactForm.email}
                       onChange={(e) => setContactForm((p) => ({ ...p, email: e.target.value }))}
                       placeholder="Email (optional)"
-                      className="w-full px-5 py-4 bg-white dark:bg-white/10 border border-burgundy-300/60 dark:border-white/20 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/60 focus:border-gold-400 focus:outline-none transition-colors"
+                      className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-300/60 dark:border-white/30 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
                     />
                     <input
                       type="tel"
                       value={contactForm.phone}
                       onChange={(e) => setContactForm((p) => ({ ...p, phone: e.target.value }))}
                       placeholder="Phone (optional)"
-                      className="w-full px-5 py-4 bg-white dark:bg-white/10 border border-burgundy-300/60 dark:border-white/20 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/60 focus:border-gold-400 focus:outline-none transition-colors"
+                      className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-300/60 dark:border-white/30 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
                     />
                   </div>
                   <textarea
@@ -1605,7 +1605,7 @@ const Index = () => {
                     onChange={(e) => setContactForm((p) => ({ ...p, message: e.target.value }))}
                     rows={4}
                     placeholder="How can we help?"
-                    className="w-full px-5 py-4 bg-white dark:bg-white/10 border border-burgundy-300/60 dark:border-white/20 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/60 focus:border-gold-400 focus:outline-none transition-colors resize-none"
+                    className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-300/60 dark:border-white/30 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors resize-none"
                   />
                   <button
                     type="submit"
