@@ -1093,10 +1093,17 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">  
             {latestSermons.map((sermon, index) => (  
               <article key={index} className={`group cursor-pointer hover-lift card-3d ${isVisible('sermons') ? 'animate-scale-in' : 'opacity-0'}`} style={{animationDelay: `${index * 200}ms`}}>  
-                <div className="relative aspect-video rounded-2xl overflow-hidden mb-5 shadow-lg">  
+                <div className="relative aspect-video rounded-2xl overflow-hidden mb-5 shadow-lg bg-burgundy-100 dark:bg-burgundy-900/30">  
                   <img  
                     src={sermon.image}  
                     alt={sermon.title}  
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      e.currentTarget.style.opacity = '0.15';
+                      e.currentTarget.style.filter = 'grayscale(1)';
+                    }}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"  
                   />  
                   <div className="absolute inset-0 bg-gradient-to-t from-burgundy-950/60 to-transparent group-hover:from-burgundy-950/40 transition-all duration-300" />  
@@ -1167,10 +1174,18 @@ const Index = () => {
               >
                 <div className="flip-card-inner h-full">  
                   <div className="flip-card-front group relative glass-dark rounded-2xl overflow-hidden cursor-pointer hover-lift">  
-                    <div className="aspect-[16/10] overflow-hidden">  
+                    <div className="aspect-[16/10] overflow-hidden bg-burgundy-900/40">  
                       <img  
                         src={event.image}  
                         alt={event.title}  
+                        loading="lazy"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          // If a remote image fails (mobile networks, ad-blockers), keep the card looking intentional.
+                          e.currentTarget.style.opacity = '0.15';
+                          e.currentTarget.style.filter = 'grayscale(1)';
+                        }}
                         className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-all duration-500 group-hover:scale-105"  
                       />  
                     </div>  
