@@ -320,7 +320,7 @@ const CountdownTimer = () => {
     <div className="text-center">  
       <p className="text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Next Service</p>  
       <h3 className="font-display text-2xl font-bold text-white mb-6">{nextService}</h3>  
-      <div className="grid grid-cols-4 gap-4">  
+      <div className="grid grid-cols-4 gap-2 sm:gap-4">  
         {[  
           { label: 'Days', value: timeLeft.days },  
           { label: 'Hours', value: timeLeft.hours },  
@@ -328,8 +328,8 @@ const CountdownTimer = () => {
           { label: 'Seconds', value: timeLeft.seconds }  
         ].map((unit, index) => (  
           <div key={index} className="countdown-unit">  
-            <div className="glass-dark rounded-2xl p-4">  
-              <div className="countdown-number font-display text-3xl sm:text-4xl font-bold text-gold-400">  
+            <div className="glass-dark rounded-2xl p-2 sm:p-4">  
+              <div className="countdown-number font-display tabular-nums leading-none text-2xl sm:text-4xl font-bold text-gold-400">  
                 {String(unit.value).padStart(2, '0')}  
               </div>  
               <div className="text-white/60 text-xs uppercase mt-2">{unit.label}</div>  
@@ -434,7 +434,7 @@ const TestimonialCarousel = () => {
       onMouseEnter={() => setIsPaused(true)}  
       onMouseLeave={() => setIsPaused(false)}  
     >  
-      <div className="carousel-track" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>  
+      <div className="carousel-track" style={{ transform: `translate3d(-${currentSlide * 100}%, 0, 0)` }}>  
         {testimonials.map((testimonial, index) => (  
           <div key={index} className="carousel-slide px-4">  
             <div className="max-w-3xl mx-auto glass-dark rounded-3xl p-8 sm:p-12">  
