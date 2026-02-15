@@ -244,8 +244,12 @@ const AnimatedCounter = ({ end, duration = 2000, suffix = "" }: { end: number; d
   }, [isVisible, end, duration]);
 
   return (  
-    <div ref={countRef} className="font-display text-5xl font-bold">  
-      {count}{suffix}  
+    <div
+      ref={countRef}
+      className="font-display font-bold tabular-nums leading-none text-3xl sm:text-4xl lg:text-5xl"
+    >
+      {count}
+      {suffix}
     </div>  
   );  
 };
@@ -911,7 +915,7 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}  
-      <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">  
+      <section className="relative h-screen min-h-[700px] flex items-start md:items-center justify-center overflow-hidden pt-24 md:pt-0">  
         {/* Animated Blobs */}  
         <div className="blob blob-1"></div>  
         <div className="blob blob-2"></div>  

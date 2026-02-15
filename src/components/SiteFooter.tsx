@@ -16,7 +16,7 @@ export default function SiteFooter({ showSocial = true }: { showSocial?: boolean
               {SITE.tagline} Join us as we grow together in faith, love, and service.
             </p>
             {showSocial && (
-              <div className="flex gap-3">
+              <div className="flex flex-wrap gap-3">
                 {(["facebook", "instagram", "youtube"] as const).map((social) => (
                   <a
                     key={social}
@@ -105,11 +105,11 @@ export default function SiteFooter({ showSocial = true }: { showSocial?: boolean
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <p className="text-white/40 text-sm">
             © 2026 {SITE.name}. All rights reserved.{" "}
             <span className="mx-2">•</span>
-            Designed by{" "}
+            Designed by {" "}
             <a
               href={SITE.links.website}
               target="_blank"
