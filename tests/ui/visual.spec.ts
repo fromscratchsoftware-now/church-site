@@ -76,6 +76,8 @@ test.describe('Mobile visual regression', () => {
     await expect(page).toHaveScreenshot('visit-cards-light.png');
 
     await gotoWithTheme(page, '/#visit', 'dark');
+    // WebKit can be slow to render the background/pattern; give it extra time.
+    await page.waitForTimeout(800);
     await expect(page).toHaveScreenshot('visit-cards-dark.png');
   });
 

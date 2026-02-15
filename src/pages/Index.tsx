@@ -1031,7 +1031,7 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">  
             <div className={`${isVisible('about') ? 'animate-slide-in-left' : ''}`}>  
               <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Our Story</p>  
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary dark:text-white font-bold mb-6 theme-transition">  
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-burgundy-950 dark:text-white font-bold mb-6 theme-transition">  
                 A Place Where Everyone Belongs  
               </h2>  
               <p className="text-body dark:text-white/80 text-lg leading-relaxed mb-6 theme-transition">  
@@ -1489,7 +1489,7 @@ const Index = () => {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">  
             <div>  
               <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Get in Touch</p>  
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary dark:text-white font-bold mb-6 theme-transition">  
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-burgundy-950 dark:text-white font-bold mb-6 theme-transition">  
                 We're Here For You  
               </h2>  
               <p className="text-body dark:text-white/80 text-lg leading-relaxed mb-10 theme-transition">  
@@ -1505,7 +1505,7 @@ const Index = () => {
                     </svg>  
                   </div>  
                   <div>  
-                    <h3 className="font-semibold text-primary dark:text-white mb-1 theme-transition">Address</h3>  
+                    <h3 className="font-semibold text-burgundy-950 dark:text-white mb-1 theme-transition">Address</h3>  
                     <p className="text-burgundy-700 dark:text-white/70 theme-transition">1234 Faith Avenue, Atlanta, GA 30301</p>  
                   </div>  
                 </div>  
@@ -1517,7 +1517,7 @@ const Index = () => {
                     </svg>  
                   </div>  
                   <div>  
-                    <h3 className="font-semibold text-primary dark:text-white mb-1 theme-transition">Phone</h3>  
+                    <h3 className="font-semibold text-burgundy-950 dark:text-white mb-1 theme-transition">Phone</h3>  
                     <p className="text-burgundy-700 dark:text-white/70 theme-transition">(404) 555-0123</p>  
                   </div>  
                 </div>  
@@ -1529,7 +1529,7 @@ const Index = () => {
                     </svg>  
                   </div>  
                   <div>  
-                    <h3 className="font-semibold text-primary dark:text-white mb-1 theme-transition">Email</h3>  
+                    <h3 className="font-semibold text-burgundy-950 dark:text-white mb-1 theme-transition">Email</h3>  
                     <p className="text-burgundy-700 dark:text-white/70 theme-transition">info@churchname.org</p>  
                   </div>  
                 </div>  
@@ -1537,7 +1537,7 @@ const Index = () => {
 
               {/* Social Links */}  
               <div className="mt-10">  
-                <p className="font-semibold text-primary dark:text-white mb-4 theme-transition">Follow Us</p>  
+                <p className="font-semibold text-burgundy-950 dark:text-white mb-4 theme-transition">Follow Us</p>  
                 <div className="flex gap-4">  
                   {['facebook', 'instagram', 'youtube', 'twitter'].map((social) => (  
                     <a  
@@ -1572,7 +1572,7 @@ const Index = () => {
 
               {/* Contact Form */}  
               <div className="mt-12 bg-white/95 dark:bg-white/5 rounded-3xl p-6 sm:p-8 shadow-xl hover-lift theme-transition">  
-                <h3 className="font-display text-2xl font-bold text-primary dark:text-white mb-2 theme-transition">Send a Message</h3>  
+                <h3 className="font-display text-2xl font-bold text-burgundy-950 dark:text-white mb-2 theme-transition">Send a Message</h3>  
                 <p className="text-burgundy-700 dark:text-white/70 mb-6 theme-transition">We will respond as soon as possible.</p>  
                 <form onSubmit={submitContact} className="space-y-4">  
                   <input
@@ -1581,7 +1581,7 @@ const Index = () => {
                     value={contactForm.fullName}
                     onChange={(e) => setContactForm((p) => ({ ...p, fullName: e.target.value }))}
                     placeholder="Full Name"
-                    className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-300/60 dark:border-white/30 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
+                    className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
                   />
                   <div className="grid sm:grid-cols-2 gap-4">
                     <input
@@ -1589,14 +1589,14 @@ const Index = () => {
                       value={contactForm.email}
                       onChange={(e) => setContactForm((p) => ({ ...p, email: e.target.value }))}
                       placeholder="Email (optional)"
-                      className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-300/60 dark:border-white/30 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
+                      className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
                     />
                     <input
                       type="tel"
                       value={contactForm.phone}
                       onChange={(e) => setContactForm((p) => ({ ...p, phone: e.target.value }))}
                       placeholder="Phone (optional)"
-                      className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-300/60 dark:border-white/30 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
+                      className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
                     />
                   </div>
                   <textarea
@@ -1605,7 +1605,7 @@ const Index = () => {
                     onChange={(e) => setContactForm((p) => ({ ...p, message: e.target.value }))}
                     rows={4}
                     placeholder="How can we help?"
-                    className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-300/60 dark:border-white/30 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors resize-none"
+                    className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors resize-none"
                   />
                   <button
                     type="submit"
