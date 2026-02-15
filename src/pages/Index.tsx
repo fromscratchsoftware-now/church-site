@@ -1022,7 +1022,7 @@ const Index = () => {
       </section>
 
       {/* About Section */}  
-      <section id="about" className="py-24 lg:py-32 bg-cream dark:bg-charcoal relative overflow-hidden gradient-mesh theme-transition">  
+      <section id="about" className="scroll-mt-24 py-24 lg:py-32 bg-cream dark:bg-charcoal relative overflow-hidden gradient-mesh theme-transition">  
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('about') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">  
             <div className={`${isVisible('about') ? 'animate-slide-in-left' : ''}`}>  
@@ -1078,7 +1078,7 @@ const Index = () => {
       </section>
 
       {/* Sermons Section */}  
-      <section id="sermons" className="py-24 lg:py-32 bg-white dark:bg-burgundy-950 relative overflow-hidden theme-transition">  
+      <section id="sermons" className="scroll-mt-24 py-24 lg:py-32 bg-white dark:bg-burgundy-950 relative overflow-hidden theme-transition">  
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('sermons') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="text-center mb-16">  
             <p className="text-burgundy-600 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Latest Messages</p>  
@@ -1142,7 +1142,7 @@ const Index = () => {
       </section>
 
       {/* Events Section */}  
-      <section id="events" className="py-24 lg:py-32 bg-burgundy-950 dark:bg-charcoal relative overflow-hidden theme-transition">  
+      <section id="events" className="scroll-mt-24 py-24 lg:py-32 bg-burgundy-950 dark:bg-charcoal relative overflow-hidden theme-transition">  
         <div className="blob blob-1"></div>  
         <div className="blob blob-2"></div>  
           
@@ -1227,7 +1227,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials Carousel Section */}  
-      <section id="testimonials" className="py-24 lg:py-32 bg-cream dark:bg-burgundy-950 relative gradient-mesh theme-transition">  
+      <section id="testimonials" className="scroll-mt-24 py-24 lg:py-32 bg-cream dark:bg-burgundy-950 relative gradient-mesh theme-transition">  
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="text-center mb-16">  
             <p className="text-burgundy-600 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Stories of Faith</p>  
@@ -1256,7 +1256,7 @@ const Index = () => {
       </section>
 
       {/* Giving Section */}  
-      <section id="giving" className="py-24 lg:py-32 bg-gradient-to-br from-gold-500 via-gold-400 to-gold-500 relative overflow-hidden">  
+      <section id="giving" className="scroll-mt-24 py-24 lg:py-32 bg-gradient-to-br from-gold-500 via-gold-400 to-gold-500 relative overflow-hidden">  
         <div className="absolute inset-0 opacity-20">  
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wLTRoLTJ2LTJoMnYyem0wIDI4aC0ydi0yaDJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')] animate-[scroll_20s_linear_infinite]"></div>  
         </div>  
@@ -1336,7 +1336,7 @@ const Index = () => {
       </section>
 
       {/* Plan Your Visit Section */}  
-      <section id="visit" className="py-24 lg:py-32 bg-white dark:bg-charcoal relative gradient-mesh theme-transition">  
+      <section id="visit" className="scroll-mt-24 py-24 lg:py-32 bg-white dark:bg-charcoal relative gradient-mesh theme-transition">  
         <div className="max-w-7xl mx-auto px-4 transition-all duration-1000 opacity-100 translate-y-0">  
           <div className="text-center mb-16">  
             <p className="text-burgundy-600 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">We'd Love to Meet You</p>  
