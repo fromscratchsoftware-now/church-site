@@ -119,7 +119,7 @@ export function SiteNav({ variant = "overlay" }: { variant?: "overlay" | "solid"
     variant === "solid"
       ? "glass-dark shadow-2xl"
       : scrolled
-        ? "glass-dark shadow-2xl"
+        ? "bg-burgundy-950/90 backdrop-blur-md shadow-2xl"
         : "bg-transparent";
 
   const baseLinkClass = `text-sm font-medium transition-all duration-300 hover:opacity-70 ${"text-white"}`;
