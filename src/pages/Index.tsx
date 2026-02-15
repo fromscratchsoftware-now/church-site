@@ -1571,7 +1571,7 @@ const Index = () => {
               </div>  
 
               {/* Contact Form */}  
-              <div className="mt-12 bg-white dark:bg-burgundy-900/20 rounded-3xl p-6 sm:p-8 shadow-xl hover-lift theme-transition">  
+              <div className="mt-12 bg-white/95 dark:bg-white/5 rounded-3xl p-6 sm:p-8 shadow-xl hover-lift theme-transition">  
                 <h3 className="font-display text-2xl font-bold text-primary dark:text-white mb-2 theme-transition">Send a Message</h3>  
                 <p className="text-muted mb-6 theme-transition">We will respond as soon as possible.</p>  
                 <form onSubmit={submitContact} className="space-y-4">  
@@ -1581,7 +1581,7 @@ const Index = () => {
                     value={contactForm.fullName}
                     onChange={(e) => setContactForm((p) => ({ ...p, fullName: e.target.value }))}
                     placeholder="Full Name"
-                    className="w-full px-5 py-4 glass dark:bg-burgundy-800 border border-burgundy-200 dark:border-burgundy-700 rounded-xl text-primary placeholder-charcoal/50 dark:placeholder-white/50 focus:border-gold-400 focus:outline-none transition-colors"
+                    className="w-full px-5 py-4 bg-white dark:bg-white/10 border border-burgundy-300/60 dark:border-white/20 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/60 focus:border-gold-400 focus:outline-none transition-colors"
                   />
                   <div className="grid sm:grid-cols-2 gap-4">
                     <input
@@ -1589,14 +1589,14 @@ const Index = () => {
                       value={contactForm.email}
                       onChange={(e) => setContactForm((p) => ({ ...p, email: e.target.value }))}
                       placeholder="Email (optional)"
-                      className="w-full px-5 py-4 glass dark:bg-burgundy-800 border border-burgundy-200 dark:border-burgundy-700 rounded-xl text-primary placeholder-charcoal/50 dark:placeholder-white/50 focus:border-gold-400 focus:outline-none transition-colors"
+                      className="w-full px-5 py-4 bg-white dark:bg-white/10 border border-burgundy-300/60 dark:border-white/20 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/60 focus:border-gold-400 focus:outline-none transition-colors"
                     />
                     <input
                       type="tel"
                       value={contactForm.phone}
                       onChange={(e) => setContactForm((p) => ({ ...p, phone: e.target.value }))}
                       placeholder="Phone (optional)"
-                      className="w-full px-5 py-4 glass dark:bg-burgundy-800 border border-burgundy-200 dark:border-burgundy-700 rounded-xl text-primary placeholder-charcoal/50 dark:placeholder-white/50 focus:border-gold-400 focus:outline-none transition-colors"
+                      className="w-full px-5 py-4 bg-white dark:bg-white/10 border border-burgundy-300/60 dark:border-white/20 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/60 focus:border-gold-400 focus:outline-none transition-colors"
                     />
                   </div>
                   <textarea
@@ -1605,7 +1605,7 @@ const Index = () => {
                     onChange={(e) => setContactForm((p) => ({ ...p, message: e.target.value }))}
                     rows={4}
                     placeholder="How can we help?"
-                    className="w-full px-5 py-4 glass dark:bg-burgundy-800 border border-burgundy-200 dark:border-burgundy-700 rounded-xl text-primary placeholder-charcoal/50 dark:placeholder-white/50 focus:border-gold-400 focus:outline-none transition-colors resize-none"
+                    className="w-full px-5 py-4 bg-white dark:bg-white/10 border border-burgundy-300/60 dark:border-white/20 rounded-xl text-primary dark:text-white placeholder-charcoal/70 dark:placeholder-white/60 focus:border-gold-400 focus:outline-none transition-colors resize-none"
                   />
                   <button
                     type="submit"
