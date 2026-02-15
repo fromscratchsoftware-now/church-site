@@ -5,7 +5,8 @@ export default defineConfig({
   timeout: 60_000,
   expect: {
     // Allow some variance across renderers while still catching real regressions.
-    toHaveScreenshot: { maxDiffPixelRatio: 0.01, animations: 'disabled' },
+    // WebKit/iOS can be slower to capture; increase screenshot timeout.
+    toHaveScreenshot: { maxDiffPixelRatio: 0.01, animations: 'disabled', timeout: 15_000 },
   },
   webServer: {
     command: 'npm run build && npx vite preview --host 127.0.0.1 --port 4173',

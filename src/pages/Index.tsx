@@ -1234,11 +1234,11 @@ const Index = () => {
       <section id="testimonials" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-900/60 relative gradient-mesh theme-transition dark:text-white/80">  
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="text-center mb-16">  
-            <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Stories of Faith</p>  
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-primary dark:text-white font-bold mb-6 theme-transition">  
+            <p className="text-burgundy-800 dark:text-gold-300 font-medium tracking-widest uppercase text-sm mb-4">Stories of Faith</p>  
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-burgundy-950 dark:text-white font-bold mb-6 theme-transition">  
               Member Testimonials  
             </h2>  
-            <p className="text-body dark:text-white/80 text-lg max-w-2xl mx-auto theme-transition">  
+            <p className="text-burgundy-800 dark:text-white/85 text-lg max-w-2xl mx-auto theme-transition">  
               Hear from our community about how God is working in their lives.  
             </p>  
           </div>
