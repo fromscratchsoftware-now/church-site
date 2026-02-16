@@ -18,6 +18,7 @@ Vercel is used as a fast **frontend preview** only.
 - `src/`: React app (pages fetch data from the API)
 - `public/api/`: PHP JSON API endpoints (copied to `dist/api/` on build)
 - `public/admin/`: PHP admin UI (copied to `dist/admin/` on build)
+  - includes role-based users (`admin` / `editor`) at `/admin/users.php`
 - `db/schema.sql`: MySQL schema
 - `db/seed.sql`: sample seed data
 - `db/siteground-setup.md`: SiteGround setup steps

@@ -52,6 +52,7 @@ In phpMyAdmin, you should see these tables:
 - `testimonials`
 - `blog_posts`
 - `contact_messages`
+- `admin_users`
 
 ## 4) Build For Subdirectory `/1`
 
@@ -117,3 +118,14 @@ The admin UI lives at:
 To enable it, set `ADMIN_PASSWORD_HASH` (recommended) or `ADMIN_PASSWORD` in:
 
 - `public_html/1/api/config.local.php`
+
+### Role-based users (Admin / Editor)
+
+After signing in as owner/admin, open:
+
+- `https://church.fromscratchsoftware.net/1/admin/users.php`
+
+From there you can create users with roles:
+
+- **Editor**: can manage website content (events, sermons, testimonials)
+- **Admin**: can manage users (including adding editors/admins) and content

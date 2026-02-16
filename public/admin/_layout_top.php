@@ -3,6 +3,8 @@ declare(strict_types=1);
 require_once __DIR__ . '/_bootstrap.php';
 admin_require_auth();
 $title = $title ?? 'Admin';
+$role = admin_current_role();
+$roleLabel = $role !== '' ? ucfirst($role) : 'Admin';
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,8 +15,9 @@ $title = $title ?? 'Admin';
     <style>
       :root { color-scheme: light dark; }
       body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      header { padding: 16px 20px; border-bottom: 1px solid rgba(127,127,127,0.25); display:flex; gap:14px; align-items:center; justify-content:space-between; }
-      nav a { margin-right: 12px; text-decoration: none; }
+      header { padding: 16px 20px; border-bottom: 1px solid rgba(127,127,127,0.25); display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap: wrap; }
+      nav { display:flex; align-items:center; flex-wrap: wrap; gap: 10px; }
+      nav a { text-decoration: none; }
       main { padding: 20px; max-width: 1100px; margin: 0 auto; }
       table { width: 100%; border-collapse: collapse; }
       th, td { padding: 10px 8px; border-bottom: 1px solid rgba(127,127,127,0.2); text-align: left; vertical-align: top; }
@@ -28,19 +31,28 @@ $title = $title ?? 'Admin';
       .btn.danger { background: #b91c1c; color: #fff; border-color: #b91c1c; }
       .muted { opacity: 0.75; }
       .flash { padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(127,127,127,0.25); margin: 12px 0; }
+      .user-chip { font-size: 13px; padding: 6px 10px; border: 1px solid rgba(127,127,127,0.3); border-radius: 999px; }
+      @media (max-width: 720px) {
+        .row { flex-direction: column; }
+      }
     </style>
   </head>
   <body>
     <header>
-      <div><strong>Church Admin</strong> <span class="muted">/1</span></div>
+      <div>
+        <strong>Church Admin</strong> <span class="muted">/1</span>
+      </div>
       <nav>
         <a href="index.php">Home</a>
         <a href="events.php">Events</a>
         <a href="sermons.php">Sermons</a>
         <a href="testimonials.php">Testimonials</a>
         <a href="messages.php">Messages</a>
+        <?php if (admin_is_admin()): ?>
+          <a href="users.php">Users</a>
+        <?php endif; ?>
+        <span class="user-chip"><?= h(admin_display_name()) ?> · <?= h($roleLabel) ?></span>
         <a href="logout.php">Logout</a>
       </nav>
     </header>
     <main>
-

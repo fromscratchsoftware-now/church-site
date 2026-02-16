@@ -8,7 +8,7 @@ unset($_SESSION['flash']);
 ?>
 
 <h1 style="margin-top:0;">Admin</h1>
-<p class="muted">Manage content for sermons, events, testimonials, and view inbound messages.</p>
+<p class="muted">Editors can manage website content. Admins can manage users (add editors/admins).</p>
 
 <?php if (is_string($flash) && $flash !== ''): ?>
   <div class="flash"><?= h($flash) ?></div>
@@ -21,6 +21,9 @@ unset($_SESSION['flash']);
     <a class="btn primary" href="sermons.php">Manage Sermons</a>
     <a class="btn primary" href="testimonials.php">Manage Testimonials</a>
     <a class="btn" href="messages.php">View Messages</a>
+    <?php if (admin_is_admin()): ?>
+      <a class="btn" href="users.php">Manage Users</a>
+    <?php endif; ?>
   </div>
 </div>
 
