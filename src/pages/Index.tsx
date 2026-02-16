@@ -528,8 +528,10 @@ const Index = () => {
     message: '',
   });
   const [contactStatus, setContactStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [heroVideoFailed, setHeroVideoFailed] = useState(false);
 
   const YOUTUBE_LIVE_URL = SITE.links.youtubeLive;
+  const HERO_VIDEO_URL = SITE.links.heroVideo || "";
   const CHURCH_NAME = SITE.name;
   const CHURCH_ADDRESS = `${SITE.address.line1}, ${SITE.address.line2}`;
   const SERVICE_TIMES_TEXT = `Sundays at ${SITE.serviceTimes.sunday}. ${SITE.serviceTimes.wednesday}.`;
@@ -938,7 +940,19 @@ const Index = () => {
             src="/images/unsplash/1438232992991-995b7058bbb3-w1200.jpg"  
             alt="Church worship"  
             className="w-full h-full object-cover"  
-          />  
+          />
+          {HERO_VIDEO_URL && !heroVideoFailed && (
+            <video
+              className="absolute inset-0 w-full h-full object-cover"
+              src={HERO_VIDEO_URL}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              onError={() => setHeroVideoFailed(true)}
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-burgundy-950/80 via-burgundy-900/70 to-burgundy-950/90" />  
         </div>
 
