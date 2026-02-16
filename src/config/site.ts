@@ -17,7 +17,7 @@ export const SITE = {
     website: "https://fromscratchsoftware.com/",
     youtubeLive: "https://www.youtube.com/@YourChurchChannel/live",
     // Optional hero background video (MP4). Keep empty to use image-only hero.
-    heroVideo: "/images/hero.mp4",
+    heroVideo: "",
     giving: "#",
     facebook: "#",
     instagram: "#",

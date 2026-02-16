@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';  
+import React, { useState, useEffect, useMemo } from 'react';  
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { SITE } from '../config/site';
@@ -111,7 +111,7 @@ const Sermons = () => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const categories = ['All', 'Recent', 'Most Viewed', 'Faith & Hope', 'Prayer', 'Worship', 'Family'];
 
-  const fallbackSermons: Sermon[] = [  
+  const fallbackSermons: Sermon[] = useMemo(() => [  
     {  
       title: "Walking in Purpose",  
       speaker: "Pastor James Williams",  
@@ -292,11 +292,10 @@ const Sermons = () => {
       videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",  
       description: "Uncover God's master plan for your life and learn how to align yourself with His divine purposes. This message will give you clarity and direction."  
     }  
-  ];
+  ], []);
 
   const [allSermons, setAllSermons] = useState<Sermon[]>(fallbackSermons);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
@@ -309,7 +308,7 @@ const Sermons = () => {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [fallbackSermons]);
 
   const filteredSermons = selectedCategory === 'All'   
     ? allSermons   

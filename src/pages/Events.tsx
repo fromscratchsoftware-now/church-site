@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { loadEvents, type Event } from '../lib/content';
@@ -312,7 +312,7 @@ const Events = () => {
 
   const categories = ['Upcoming', 'This Month', 'Youth', 'Women', 'Men', 'Outreach', 'Worship', 'Music', 'Couples', 'Community'];
 
-  const fallbackEvents: Event[] = [  
+  const fallbackEvents: Event[] = useMemo(() => [  
     {  
       title: "Youth Revival Weekend",  
       date: "Feb 21-23, 2026",  
@@ -433,10 +433,9 @@ const Events = () => {
       image: "/images/unsplash/1497633762265-9d179a990aa6-w600.jpg",  
       description: "Pray for students, teachers, and families as we prepare for the new school year."  
     }  
-  ];
+  ], []);
 
   const [allEvents, setAllEvents] = useState<Event[]>(fallbackEvents);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
@@ -449,7 +448,7 @@ const Events = () => {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [fallbackEvents]);
   const filteredEvents = selectedCategory === 'Upcoming'   
     ? allEvents   
     : selectedCategory === 'This Month'  

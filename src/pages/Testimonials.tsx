@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { loadTestimonials } from '../lib/content';
@@ -7,7 +7,7 @@ const Testimonials = () => {
   const [visibleCount, setVisibleCount] = useState(9);
   const categories = ['All', 'New Members', 'Long-time Members', 'Youth', 'Ministry Leaders', 'Volunteers'];
 
-  const fallbackTestimonials = [  
+  const fallbackTestimonials = useMemo(() => [  
     {  
       name: "Sarah Johnson",  
       role: "Member since 2015",  
@@ -143,10 +143,9 @@ const Testimonials = () => {
       rating: 5,  
       date: "February 2026"  
     }  
-  ];
+  ], []);
 
   const [allTestimonials, setAllTestimonials] = useState(fallbackTestimonials);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
@@ -159,7 +158,7 @@ const Testimonials = () => {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [fallbackTestimonials]);
   const filteredTestimonials = selectedCategory === 'All'   
     ? allTestimonials   
     : allTestimonials.filter(t => t.category === selectedCategory);
