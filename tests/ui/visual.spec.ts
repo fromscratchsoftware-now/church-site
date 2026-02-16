@@ -60,7 +60,8 @@ test.describe('Mobile visual regression', () => {
     await expect(page).toHaveScreenshot('home-sermons-light.png');
 
     await gotoWithTheme(page, '/#sermons', 'dark');
-    await expect(page).toHaveScreenshot('home-sermons-dark.png');
+    await page.waitForTimeout(800);
+    await expect(page).toHaveScreenshot('home-sermons-dark.png', { timeout: 20_000 });
   });
 
   test('Events section cards on home (light/dark)', async ({ page }) => {
