@@ -25,6 +25,13 @@ if [[ ! -d dist ]]; then
   exit 1
 fi
 
+# Safety: this deployment targets /1/, so built asset paths must include /1/.
+if ! grep -q '/1/assets/' dist/index.html; then
+  echo "Refusing deploy: dist/index.html is not built for /1/ (missing /1/assets/)." >&2
+  echo "Run with: VITE_BASE_PATH=/1/ npm run build  (or RUN_BUILD=1 ./scripts/deploy_siteground.sh)" >&2
+  exit 1
+fi
+
 rsync -az --delete \
   --exclude 'api/config.local.php' \
   -e "ssh -i ${SSH_KEY} -p ${REMOTE_PORT}" \
