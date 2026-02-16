@@ -111,3 +111,15 @@ SELECT 'James Wilson', 'Worship Team',
        1, 4
 WHERE NOT EXISTS (SELECT 1 FROM testimonials WHERE full_name='James Wilson' AND avatar_url LIKE '%1500648767791%');
 
+-- Admin users (role-based admin CMS)
+-- Default demo credentials (change after first login):
+--  - admin@church.local / ChurchAdmin!2026
+--  - editor@church.local / ChurchEditor!2026
+INSERT INTO admin_users (full_name, email, password_hash, role, is_active)
+SELECT 'Church Admin', 'admin@church.local', '$2b$10$r0AyIXeO3HtL9X5bfmnH/uNmbepYvYDZcx2d.HOUQ.9XJD8IGfMw2', 'admin', 1
+WHERE NOT EXISTS (SELECT 1 FROM admin_users WHERE email='admin@church.local');
+
+INSERT INTO admin_users (full_name, email, password_hash, role, is_active)
+SELECT 'Church Editor', 'editor@church.local', '$2b$10$4sTOs6fNZKNmYluPZ2UtL.RZwc6uAd49cSu5qIRwntSaBRMWXLuVW', 'editor', 1
+WHERE NOT EXISTS (SELECT 1 FROM admin_users WHERE email='editor@church.local');
+
