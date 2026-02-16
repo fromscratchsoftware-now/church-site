@@ -1026,18 +1026,18 @@ const Index = () => {
       </section>
 
       {/* About Section */}  
-      <section id="about" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-charcoal relative overflow-hidden gradient-mesh theme-transition dark:text-white/80">  
+      <section id="about" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-charcoal relative overflow-hidden gradient-mesh theme-transition dark:!text-white/85">  
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('about') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">  
             <div className={`${isVisible('about') ? 'animate-slide-in-left' : ''}`}>  
               <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Our Story</p>  
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-burgundy-950 dark:text-white font-bold mb-6 theme-transition">  
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-burgundy-950 dark:!text-white font-bold mb-6 theme-transition">  
                 A Place Where Everyone Belongs  
               </h2>  
-              <p className="text-body dark:text-white/80 text-lg leading-relaxed mb-6 theme-transition">  
+              <p className="text-body dark:!text-white/85 text-lg leading-relaxed mb-6 theme-transition">  
                 For over 50 years, Church Name has been a beacon of hope in our community. We believe in the power of authentic worship, meaningful connections, and serving others with the love of Christ.  
               </p>  
-              <p className="text-body dark:text-white/80 text-lg leading-relaxed mb-8 theme-transition">  
+              <p className="text-body dark:!text-white/85 text-lg leading-relaxed mb-8 theme-transition">  
                 Whether you're taking your first steps in faith or you've been walking with God for decades, there's a place for you here. Come as you are and discover the life-changing power of God's grace.  
               </p>  
                 
@@ -1045,15 +1045,15 @@ const Index = () => {
               <div className="grid grid-cols-3 gap-6 mb-8">  
                 <div className="text-center p-4 glass dark:bg-burgundy-900/20 rounded-2xl hover-lift theme-transition">  
                   <AnimatedCounter end={50} suffix="+" />  
-                  <p className="text-sm text-muted dark:text-white/70 mt-2 theme-transition">Years Serving</p>  
+                  <p className="text-sm text-muted dark:!text-white/75 mt-2 theme-transition">Years Serving</p>  
                 </div>  
                 <div className="text-center p-4 glass dark:bg-burgundy-900/20 rounded-2xl hover-lift theme-transition">  
                   <AnimatedCounter end={1200} suffix="+" />  
-                  <p className="text-sm text-muted dark:text-white/70 mt-2 theme-transition">Members</p>  
+                  <p className="text-sm text-muted dark:!text-white/75 mt-2 theme-transition">Members</p>  
                 </div>  
                 <div className="text-center p-4 glass dark:bg-burgundy-900/20 rounded-2xl hover-lift theme-transition">  
                   <AnimatedCounter end={30} suffix="+" />  
-                  <p className="text-sm text-muted dark:text-white/70 mt-2 theme-transition">Ministries</p>  
+                  <p className="text-sm text-muted dark:!text-white/75 mt-2 theme-transition">Ministries</p>  
                 </div>  
               </div>  
                 
@@ -1231,11 +1231,11 @@ const Index = () => {
       </section>
 
       {/* Testimonials Carousel Section */}  
-      <section id="testimonials" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-900/60 relative gradient-mesh theme-transition dark:text-white/80">  
+      <section id="testimonials" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-900/60 relative gradient-mesh theme-transition dark:!text-white/85">  
         <div className={`max-w-7xl mx-auto px-4 transition-all duration-1000 ${isVisible('testimonials') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>  
           <div className="text-center mb-16">  
             <p className="text-burgundy-800 dark:text-gold-300 font-medium tracking-widest uppercase text-sm mb-4">Stories of Faith</p>  
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-burgundy-950 dark:text-white font-bold mb-6 theme-transition">  
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-burgundy-950 dark:!text-white font-bold mb-6 theme-transition">  
               Member Testimonials  
             </h2>  
             <p className="text-burgundy-800 dark:text-white/85 text-lg max-w-2xl mx-auto theme-transition">  
@@ -1408,8 +1408,8 @@ const Index = () => {
                 <div className="w-16 h-16 bg-burgundy-100 dark:bg-burgundy-800 rounded-2xl flex items-center justify-center mx-auto mb-5 text-burgundy-700 dark:text-gold-400 theme-transition">  
                   {item.icon}  
                 </div>  
-                <h3 className="font-display text-xl font-semibold text-burgundy-950 dark:text-white mb-3 theme-transition">{item.title}</h3>  
-                <p className="text-burgundy-700 dark:text-white/80 theme-transition">{item.desc}</p>  
+                <h3 className="font-display text-xl font-semibold text-burgundy-950 dark:!text-white mb-3 theme-transition">{item.title}</h3>  
+                <p className="text-burgundy-700 dark:!text-white/85 theme-transition">{item.desc}</p>  
               </div>  
             ))}  
           </div>
@@ -1484,15 +1484,15 @@ const Index = () => {
       </section>
 
       {/* Contact Section */}  
-      <section id="contact" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-900/60 relative gradient-mesh theme-transition dark:text-white/80">  
+      <section id="contact" className="scroll-mt-40 py-24 lg:py-32 bg-cream dark:bg-burgundy-900/60 relative gradient-mesh theme-transition dark:!text-white/85">  
         <div className="max-w-7xl mx-auto px-4 transition-all duration-1000 opacity-100 translate-y-0">  
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">  
             <div>  
               <p className="text-burgundy-800 dark:text-gold-400 font-medium tracking-widest uppercase text-sm mb-4">Get in Touch</p>  
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-burgundy-950 dark:text-white font-bold mb-6 theme-transition">  
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-burgundy-950 dark:!text-white font-bold mb-6 theme-transition">  
                 We're Here For You  
               </h2>  
-              <p className="text-body dark:text-white/80 text-lg leading-relaxed mb-10 theme-transition">  
+              <p className="text-body dark:!text-white/85 text-lg leading-relaxed mb-10 theme-transition">  
                 Have questions? Need prayer? Want to learn more about our ministries? We'd love to hear from you. Reach out anytime.  
               </p>
 
@@ -1505,8 +1505,8 @@ const Index = () => {
                     </svg>  
                   </div>  
                   <div>  
-                    <h3 className="font-semibold text-burgundy-950 dark:text-white mb-1 theme-transition">Address</h3>  
-                    <p className="text-burgundy-700 dark:text-white/70 theme-transition">1234 Faith Avenue, Atlanta, GA 30301</p>  
+                    <h3 className="font-semibold text-burgundy-950 dark:!text-white mb-1 theme-transition">Address</h3>  
+                    <p className="text-burgundy-700 dark:!text-white/75 theme-transition">1234 Faith Avenue, Atlanta, GA 30301</p>  
                   </div>  
                 </div>  
                   
@@ -1517,8 +1517,8 @@ const Index = () => {
                     </svg>  
                   </div>  
                   <div>  
-                    <h3 className="font-semibold text-burgundy-950 dark:text-white mb-1 theme-transition">Phone</h3>  
-                    <p className="text-burgundy-700 dark:text-white/70 theme-transition">(404) 555-0123</p>  
+                    <h3 className="font-semibold text-burgundy-950 dark:!text-white mb-1 theme-transition">Phone</h3>  
+                    <p className="text-burgundy-700 dark:!text-white/75 theme-transition">(404) 555-0123</p>  
                   </div>  
                 </div>  
                   
@@ -1529,15 +1529,15 @@ const Index = () => {
                     </svg>  
                   </div>  
                   <div>  
-                    <h3 className="font-semibold text-burgundy-950 dark:text-white mb-1 theme-transition">Email</h3>  
-                    <p className="text-burgundy-700 dark:text-white/70 theme-transition">info@churchname.org</p>  
+                    <h3 className="font-semibold text-burgundy-950 dark:!text-white mb-1 theme-transition">Email</h3>  
+                    <p className="text-burgundy-700 dark:!text-white/75 theme-transition">info@churchname.org</p>  
                   </div>  
                 </div>  
               </div>
 
               {/* Social Links */}  
               <div className="mt-10">  
-                <p className="font-semibold text-burgundy-950 dark:text-white mb-4 theme-transition">Follow Us</p>  
+                <p className="font-semibold text-burgundy-950 dark:!text-white mb-4 theme-transition">Follow Us</p>  
                 <div className="flex gap-4">  
                   {['facebook', 'instagram', 'youtube', 'twitter'].map((social) => (  
                     <a  
@@ -1572,8 +1572,8 @@ const Index = () => {
 
               {/* Contact Form */}  
               <div className="mt-12 bg-white/95 dark:bg-white/5 rounded-3xl p-6 sm:p-8 shadow-xl hover-lift theme-transition">  
-                <h3 className="font-display text-2xl font-bold text-burgundy-950 dark:text-white mb-2 theme-transition">Send a Message</h3>  
-                <p className="text-burgundy-700 dark:text-white/70 mb-6 theme-transition">We will respond as soon as possible.</p>  
+                <h3 className="font-display text-2xl font-bold text-burgundy-950 dark:!text-white mb-2 theme-transition">Send a Message</h3>  
+                <p className="text-burgundy-700 dark:!text-white/75 mb-6 theme-transition">We will respond as soon as possible.</p>  
                 <form onSubmit={submitContact} className="space-y-4">  
                   <input
                     type="text"
@@ -1581,7 +1581,7 @@ const Index = () => {
                     value={contactForm.fullName}
                     onChange={(e) => setContactForm((p) => ({ ...p, fullName: e.target.value }))}
                     placeholder="Full Name"
-                    className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
+                    className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:!text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
                   />
                   <div className="grid sm:grid-cols-2 gap-4">
                     <input
@@ -1589,14 +1589,14 @@ const Index = () => {
                       value={contactForm.email}
                       onChange={(e) => setContactForm((p) => ({ ...p, email: e.target.value }))}
                       placeholder="Email (optional)"
-                      className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
+                      className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:!text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
                     />
                     <input
                       type="tel"
                       value={contactForm.phone}
                       onChange={(e) => setContactForm((p) => ({ ...p, phone: e.target.value }))}
                       placeholder="Phone (optional)"
-                      className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
+                      className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:!text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors"
                     />
                   </div>
                   <textarea
@@ -1605,7 +1605,7 @@ const Index = () => {
                     onChange={(e) => setContactForm((p) => ({ ...p, message: e.target.value }))}
                     rows={4}
                     placeholder="How can we help?"
-                    className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors resize-none"
+                    className="w-full px-5 py-4 bg-white dark:bg-white/14 border border-burgundy-400/60 dark:border-white/30 rounded-xl text-burgundy-950 dark:!text-white placeholder-charcoal/90 dark:placeholder-white/75 focus:border-gold-400 focus:outline-none transition-colors resize-none"
                   />
                   <button
                     type="submit"

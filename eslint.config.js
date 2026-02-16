@@ -6,7 +6,15 @@ import reactRefresh from "eslint-plugin-react-refresh";
 
 export default [
   {
-    ignores: ["dist/**", "node_modules/**", "_remote_bundle.js", "_remote_bundle.js.map"],
+    ignores: [
+      "dist/**",
+      "node_modules/**",
+      "playwright-report/**",
+      "test-results/**",
+      "tests/**/visual.spec.ts-snapshots/**",
+      "_remote_bundle.js",
+      "_remote_bundle.js.map",
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
