@@ -296,6 +296,7 @@ const Sermons = () => {
 
   const [allSermons, setAllSermons] = useState<Sermon[]>(fallbackSermons);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     let cancelled = false;
     const load = async () => {

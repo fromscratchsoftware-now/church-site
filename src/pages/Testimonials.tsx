@@ -146,6 +146,7 @@ const Testimonials = () => {
   ];
 
   const [allTestimonials, setAllTestimonials] = useState(fallbackTestimonials);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     let cancelled = false;
     const load = async () => {

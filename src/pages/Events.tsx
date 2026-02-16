@@ -436,6 +436,7 @@ const Events = () => {
   ];
 
   const [allEvents, setAllEvents] = useState<Event[]>(fallbackEvents);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
