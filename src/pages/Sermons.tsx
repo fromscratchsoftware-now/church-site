@@ -1,54 +1,8 @@
 import React, { useState, useEffect } from 'react';  
 import { Link } from 'react-router-dom';
 import Layout from '../components/Layout';
-import { getJson, apiPath } from '../lib/api';
-
-const YOUTUBE_LIVE_URL = "https://www.youtube.com/@YourChurchChannel/live";
-
-interface Sermon {  
-  title: string;  
-  speaker: string;  
-  date: string;  
-  category: string;  
-  series: string;  
-  image: string;  
-  duration: string;  
-  views: string;  
-  videoUrl: string;  
-  description: string;  
-}
-
-type SermonsApiResponse = {
-  ok: boolean;
-  sermons?: Array<{
-    id: number;
-    title: string;
-    speaker: string | null;
-    sermon_date: string | null;
-    summary: string | null;
-    youtube_url: string | null;
-    audio_url: string | null;
-    thumbnail_url: string | null;
-    duration_seconds: number | null;
-  }>;
-  error?: string;
-};
-
-function formatDuration(durationSeconds: number | null): string {
-  if (!durationSeconds || durationSeconds <= 0) return '';
-  const minutes = Math.round(durationSeconds / 60);
-  return `${minutes} min`;
-}
-
-function toEmbedUrl(url: string | null): string {
-  if (!url) return '';
-  // Accept already-embed URLs
-  if (url.includes('/embed/')) return url;
-  // Convert watch?v=... to embed/...
-  const m = url.match(/[?&]v=([^&]+)/);
-  if (m) return `https://www.youtube.com/embed/${m[1]}`;
-  return url;
-}
+import { SITE } from '../config/site';
+import { loadSermons, type Sermon } from '../lib/content';
 
 // Video Player Modal Component  
 const VideoPlayerModal = ({ sermon, isOpen, onClose }: { sermon: Sermon | null; isOpen: boolean; onClose: () => void }) => {  
@@ -343,38 +297,17 @@ const Sermons = () => {
   const [allSermons, setAllSermons] = useState<Sermon[]>(fallbackSermons);
 
   useEffect(() => {
+    let cancelled = false;
     const load = async () => {
-      try {
-        const data = await getJson<SermonsApiResponse>(apiPath('api/sermons.php'));
-        const rows = data.ok && Array.isArray(data.sermons) ? data.sermons : [];
-        if (rows.length === 0) return;
-
-        const mapped: Sermon[] = rows.map((r) => {
-          const date = r.sermon_date
-            ? new Date(r.sermon_date).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })
-            : '';
-          const duration = formatDuration(r.duration_seconds);
-          return {
-            title: r.title,
-            speaker: r.speaker || 'Church Name',
-            date,
-            category: 'Recent',
-            series: 'Sermons',
-            image: r.thumbnail_url || '/images/unsplash/1507692049790-de58290a4334-w600.jpg',
-            duration: duration || ' ',
-            views: '0',
-            videoUrl: toEmbedUrl(r.youtube_url),
-            description: r.summary || '',
-          };
-        });
-
-        setAllSermons(mapped);
-      } catch {
-        // Keep fallbackSermons
-      }
+      const rows = await loadSermons(fallbackSermons);
+      if (cancelled) return;
+      setAllSermons(rows);
     };
 
     void load();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const filteredSermons = selectedCategory === 'All'   
@@ -566,7 +499,7 @@ const Sermons = () => {
           </p>  
           <div className="flex flex-col sm:flex-row gap-4 justify-center">  
             <a  
-              href={YOUTUBE_LIVE_URL}  
+              href={SITE.links.youtubeLive}  
               target="_blank"  
               rel="noopener noreferrer"  
               className="flex items-center justify-center gap-2 bg-red-600 hover:bg-red-500 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:shadow-xl hover-lift"  
