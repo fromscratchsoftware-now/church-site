@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { getJson, postJson, apiPath } from '../lib/api';
 import SiteFooter from '../components/SiteFooter';
+import { SITE } from '../config/site';
 
 // Logo Component with Two Flying Doves and Rotating Globe  
 const ChurchLogo = ({ className = "", light = false }: { className?: string; light?: boolean }) => {  
@@ -528,7 +529,11 @@ const Index = () => {
   });
   const [contactStatus, setContactStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
-  const YOUTUBE_LIVE_URL = "https://www.youtube.com/@YourChurchChannel/live";
+  const YOUTUBE_LIVE_URL = SITE.links.youtubeLive;
+  const CHURCH_NAME = SITE.name;
+  const CHURCH_ADDRESS = `${SITE.address.line1}, ${SITE.address.line2}`;
+  const SERVICE_TIMES_TEXT = `Sundays at ${SITE.serviceTimes.sunday}. ${SITE.serviceTimes.wednesday}.`;
+  const SERVICE_TIMES_BANNER = `Sundays: ${SITE.serviceTimes.sunday}`;
 
   // Theme Toggle  
   useEffect(() => {  
@@ -940,7 +945,7 @@ const Index = () => {
         {/* Hero Content */}  
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">  
           <p className="text-gold-400 font-medium tracking-widest uppercase text-sm mb-6 animate-fade-in-up opacity-0 animation-delay-200">  
-            Welcome to Church Name  
+            Welcome to {CHURCH_NAME}  
           </p>  
           <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white font-bold leading-tight mb-8 animate-fade-in-up opacity-0 animation-delay-400">  
             Experience God's  
@@ -1005,7 +1010,7 @@ const Index = () => {
                 <svg className="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">  
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />  
                 </svg>  
-                <span className="font-medium">Sundays: 8:00 AM, 10:30 AM & 6:00 PM</span>  
+                <span className="font-medium">{SERVICE_TIMES_BANNER}</span>  
               </div>  
               <div className="hidden md:block w-px h-6 bg-white/20" />  
               <div className="flex items-center gap-3">  
@@ -1013,7 +1018,7 @@ const Index = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />  
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />  
                 </svg>  
-                <span className="font-medium">1234 Faith Avenue, Atlanta, GA 30301</span>  
+                <span className="font-medium">{CHURCH_ADDRESS}</span>  
               </div>  
             </div>
 
@@ -1035,7 +1040,7 @@ const Index = () => {
                 A Place Where Everyone Belongs  
               </h2>  
               <p className="text-body dark:!text-white/85 text-lg leading-relaxed mb-6 theme-transition">  
-                For over 50 years, Church Name has been a beacon of hope in our community. We believe in the power of authentic worship, meaningful connections, and serving others with the love of Christ.  
+                For over 50 years, {CHURCH_NAME} has been a beacon of hope in our community. We believe in the power of authentic worship, meaningful connections, and serving others with the love of Christ.  
               </p>  
               <p className="text-body dark:!text-white/85 text-lg leading-relaxed mb-8 theme-transition">  
                 Whether you're taking your first steps in faith or you've been walking with God for decades, there's a place for you here. Come as you are and discover the life-changing power of God's grace.  
@@ -1366,7 +1371,7 @@ const Index = () => {
                   </svg>  
                 ),  
                 title: "Location",  
-                desc: "1234 Faith Avenue, Atlanta, GA 30301. Free parking available."  
+                desc: `${CHURCH_ADDRESS}. Free parking available.`  
               },  
               {  
                 icon: (  
@@ -1375,7 +1380,7 @@ const Index = () => {
                   </svg>  
                 ),  
                 title: "Service Times",  
-                desc: "Sundays at 8:00 AM, 10:30 AM, and 6:00 PM. Wednesday Bible Study at 7 PM."  
+                desc: SERVICE_TIMES_TEXT  
               },  
               {  
                 icon: (  
@@ -1506,7 +1511,7 @@ const Index = () => {
                   </div>  
                   <div>  
                     <h3 className="font-semibold text-burgundy-950 dark:!text-white mb-1 theme-transition">Address</h3>  
-                    <p className="text-burgundy-700 dark:!text-white/75 theme-transition">1234 Faith Avenue, Atlanta, GA 30301</p>  
+                    <p className="text-burgundy-700 dark:!text-white/75 theme-transition">{CHURCH_ADDRESS}</p>  
                   </div>  
                 </div>  
                   
