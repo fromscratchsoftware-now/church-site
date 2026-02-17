@@ -15,24 +15,28 @@ if (admin_is_authed()) {
 }
 
 $userTableExists = admin_users_table_exists();
+if ($userTableExists) {
+  admin_ensure_users_schema();
+}
 $activeUsers = admin_active_user_count();
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   admin_verify_csrf();
-  $email = strtolower(trim((string)($_POST['email'] ?? '')));
+  $identifier = trim((string)($_POST['identifier'] ?? ''));
   $pw = (string)($_POST['password'] ?? '');
 
-  if ($email !== '') {
-    $user = admin_verify_user_credentials($email, $pw);
+  if ($identifier !== '') {
+    $user = admin_verify_user_credentials($identifier, $pw);
     if (is_array($user)) {
       session_regenerate_id(true);
       admin_login_user($user);
       header('Location: index.php');
       exit;
     }
-    $error = 'Invalid email or password.';
+    $error = 'Invalid username/email or password.';
   } else {
+    // Legacy owner password fallback (identifier optional)
     if (admin_verify_password($pw)) {
       session_regenerate_id(true);
       admin_login_legacy_owner();
@@ -70,8 +74,8 @@ $csrf = admin_csrf_token();
       <form method="post">
         <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
 
-        <label class="muted" for="email">Email (user login)</label>
-        <input id="email" name="email" type="email" placeholder="editor@church.org" autocomplete="username" />
+        <label class="muted" for="identifier">Username or Email</label>
+        <input id="identifier" name="identifier" type="text" placeholder="admin or admin@church.local" autocomplete="username" />
 
         <label class="muted" for="pw" style="display:block; margin-top:10px;">Password</label>
         <input id="pw" name="password" type="password" required autocomplete="current-password" />
@@ -79,7 +83,7 @@ $csrf = admin_csrf_token();
       </form>
 
       <?php if ($activeUsers > 0): ?>
-        <div class="hint">Use <strong>email + password</strong> for admin/editor accounts. Leaving email blank uses the owner password (if configured).</div>
+        <div class="hint">Use <strong>username/email + password</strong> for admin/editor accounts. Leaving username blank uses the owner password (if configured).</div>
       <?php elseif ($userTableExists): ?>
         <div class="hint">No active users exist yet. Sign in with owner password, then add users in <code>Users</code>.</div>
       <?php else: ?>

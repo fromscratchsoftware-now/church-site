@@ -23,14 +23,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($action === 'create') {
     if (!admin_users_table_exists() && !admin_create_users_table()) {
       $error = 'User table is not ready. Initialize it first.';
+    } elseif (!admin_ensure_users_schema()) {
+      $error = 'User schema migration failed. Please try again or check DB permissions.';
     } else {
       $fullName = trim((string)($_POST['full_name'] ?? ''));
+      $username = admin_slug_username((string)($_POST['username'] ?? ''));
       $email = strtolower(trim((string)($_POST['email'] ?? '')));
       $password = (string)($_POST['password'] ?? '');
       $role = admin_normalize_role((string)($_POST['role'] ?? 'editor'));
 
       if ($fullName === '') {
         $error = 'Full name is required.';
+      } elseif (!preg_match('/^[a-z0-9._-]{3,32}$/', $username)) {
+        $error = 'Username must be 3-32 chars and contain only letters, numbers, dot, underscore, or dash.';
       } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = 'Valid email is required.';
       } elseif (strlen($password) < 8) {
@@ -43,10 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           if ($createdById <= 0) $createdById = null;
 
           $stmt = db()->prepare(
-            'INSERT INTO admin_users (full_name, email, password_hash, role, is_active, created_by)
-             VALUES (:full_name, :email, :password_hash, :role, 1, :created_by)'
+            'INSERT INTO admin_users (full_name, username, email, password_hash, role, is_active, created_by)
+             VALUES (:full_name, :username, :email, :password_hash, :role, 1, :created_by)'
           );
           $stmt->bindValue(':full_name', $fullName);
+          $stmt->bindValue(':username', $username);
           $stmt->bindValue(':email', $email);
           $stmt->bindValue(':password_hash', $hash);
           $stmt->bindValue(':role', $role);
@@ -63,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (PDOException $e) {
           $sqlState = (string)$e->getCode();
           if ($sqlState === '23000') {
-            $error = 'A user with that email already exists.';
+            $error = 'A user with that username or email already exists.';
           } else {
             $error = 'Failed to create user. Please try again.';
           }
@@ -74,10 +80,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $tableReady = admin_users_table_exists();
+if ($tableReady) {
+  admin_ensure_users_schema();
+}
+
 $rows = [];
 if ($tableReady) {
   $rows = db()->query(
-    'SELECT id, full_name, email, role, is_active, last_login_at, created_at
+    'SELECT id, full_name, username, email, role, is_active, last_login_at, created_at
      FROM admin_users
      ORDER BY id DESC
      LIMIT 500'
@@ -126,16 +136,23 @@ unset($_SESSION['flash']);
           <input name="full_name" required />
         </div>
         <div>
-          <label class="muted">Email *</label>
-          <input name="email" type="email" required placeholder="editor@church.org" />
+          <label class="muted">Username *</label>
+          <input name="username" required placeholder="editor" pattern="[A-Za-z0-9._-]{3,32}" />
         </div>
       </div>
 
       <div class="row">
         <div>
+          <label class="muted">Email *</label>
+          <input name="email" type="email" required placeholder="editor@church.org" />
+        </div>
+        <div>
           <label class="muted">Password *</label>
           <input name="password" type="password" minlength="8" required />
         </div>
+      </div>
+
+      <div class="row">
         <div>
           <label class="muted">Role *</label>
           <select name="role">
@@ -143,6 +160,7 @@ unset($_SESSION['flash']);
             <option value="admin">Admin</option>
           </select>
         </div>
+        <div></div>
       </div>
 
       <button class="btn primary" type="submit">Create User</button>
@@ -156,6 +174,7 @@ unset($_SESSION['flash']);
         <tr>
           <th>ID</th>
           <th>Name</th>
+          <th>Username</th>
           <th>Email</th>
           <th>Role</th>
           <th>Status</th>
@@ -168,6 +187,7 @@ unset($_SESSION['flash']);
           <tr>
             <td><?= (int)$r['id'] ?></td>
             <td><?= h((string)$r['full_name']) ?></td>
+            <td><?= h((string)$r['username']) ?></td>
             <td><?= h((string)$r['email']) ?></td>
             <td><?= h(ucfirst(admin_normalize_role((string)$r['role']))) ?></td>
             <td><?= (int)$r['is_active'] === 1 ? 'active' : 'inactive' ?></td>

@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { SITE } from "../config/site";
 
 export default function SiteFooter({ showSocial = true }: { showSocial?: boolean }) {
+  const baseUrl = import.meta.env.BASE_URL || "/";
+  const adminLoginHref = `${baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`}admin/login.php`;
+
   return (
     <footer className="bg-burgundy-950 dark:bg-charcoal py-16 relative overflow-hidden theme-transition">
       <div className="blob blob-1"></div>
@@ -125,6 +128,9 @@ export default function SiteFooter({ showSocial = true }: { showSocial?: boolean
             </a>
             <a href="#" className="text-white/40 hover:text-white/60 transition-colors">
               Terms of Service
+            </a>
+            <a href={adminLoginHref} className="text-white/40 hover:text-white/60 transition-colors">
+              Admin Login
             </a>
           </div>
         </div>

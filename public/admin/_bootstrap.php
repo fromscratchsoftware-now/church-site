@@ -31,6 +31,107 @@ function admin_users_table_exists(): bool {
   }
 }
 
+function admin_slug_username(string $raw): string {
+  $u = strtolower(trim($raw));
+  $u = preg_replace('/[^a-z0-9._-]+/', '', $u) ?? '';
+  $u = trim($u, '._-');
+  return $u;
+}
+
+function admin_username_from_email(string $email): string {
+  $email = strtolower(trim($email));
+  $local = $email;
+  if (str_contains($email, '@')) {
+    $parts = explode('@', $email, 2);
+    $local = $parts[0] ?? $email;
+  }
+  $u = admin_slug_username($local);
+  return $u !== '' ? $u : 'user';
+}
+
+function admin_username_exists(PDO $pdo, string $username, int $excludeId = 0): bool {
+  $stmt = $pdo->prepare('SELECT id FROM admin_users WHERE username = :u AND id <> :id LIMIT 1');
+  $stmt->execute([
+    ':u' => $username,
+    ':id' => $excludeId,
+  ]);
+  return (bool)$stmt->fetch();
+}
+
+function admin_next_available_username(PDO $pdo, string $base, int $excludeId = 0): string {
+  $base = admin_slug_username($base);
+  if ($base === '') $base = 'user';
+
+  $candidate = $base;
+  $i = 1;
+  while (admin_username_exists($pdo, $candidate, $excludeId)) {
+    $candidate = $base . $i;
+    $i++;
+    if ($i > 1000) {
+      $candidate = $base . bin2hex(random_bytes(2));
+      if (!admin_username_exists($pdo, $candidate, $excludeId)) break;
+    }
+  }
+
+  return $candidate;
+}
+
+function admin_ensure_users_schema(): bool {
+  if (!admin_users_table_exists()) return false;
+
+  try {
+    $pdo = db();
+
+    $hasUsername = false;
+    $colStmt = $pdo->query("SHOW COLUMNS FROM admin_users LIKE 'username'");
+    if ($colStmt && $colStmt->fetch()) {
+      $hasUsername = true;
+    }
+
+    if (!$hasUsername) {
+      $pdo->exec("ALTER TABLE admin_users ADD COLUMN username VARCHAR(80) NULL AFTER full_name");
+    }
+
+    $rows = $pdo->query('SELECT id, username, email FROM admin_users ORDER BY id ASC')->fetchAll();
+    $updateStmt = $pdo->prepare('UPDATE admin_users SET username = :u WHERE id = :id');
+
+    foreach ($rows as $r) {
+      $id = (int)($r['id'] ?? 0);
+      if ($id <= 0) continue;
+
+      $current = admin_slug_username((string)($r['username'] ?? ''));
+      if ($current === '') {
+        $current = admin_username_from_email((string)($r['email'] ?? ''));
+      }
+      if ($current === '') {
+        $current = 'user' . $id;
+      }
+
+      $resolved = admin_next_available_username($pdo, $current, $id);
+      $updateStmt->execute([
+        ':u' => $resolved,
+        ':id' => $id,
+      ]);
+    }
+
+    $idxStmt = $pdo->query("SHOW INDEX FROM admin_users WHERE Key_name = 'uq_admin_users_username'");
+    $hasUsernameIdx = $idxStmt && $idxStmt->fetch();
+    if (!$hasUsernameIdx) {
+      $pdo->exec("ALTER TABLE admin_users ADD UNIQUE KEY uq_admin_users_username (username)");
+    }
+
+    $colInfoStmt = $pdo->query("SHOW COLUMNS FROM admin_users LIKE 'username'");
+    $colInfo = $colInfoStmt ? $colInfoStmt->fetch() : false;
+    if ($colInfo && strtoupper((string)($colInfo['Null'] ?? '')) === 'YES') {
+      $pdo->exec("ALTER TABLE admin_users MODIFY username VARCHAR(80) NOT NULL");
+    }
+
+    return true;
+  } catch (Throwable $e) {
+    return false;
+  }
+}
+
 function admin_create_users_table(): bool {
   if (!admin_db_ready()) return false;
 
@@ -38,6 +139,7 @@ function admin_create_users_table(): bool {
 CREATE TABLE IF NOT EXISTS admin_users (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   full_name VARCHAR(255) NOT NULL,
+  username VARCHAR(80) NOT NULL,
   email VARCHAR(320) NOT NULL,
   password_hash VARCHAR(255) NOT NULL,
   role ENUM('admin','editor') NOT NULL DEFAULT 'editor',
@@ -47,6 +149,7 @@ CREATE TABLE IF NOT EXISTS admin_users (
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
+  UNIQUE KEY uq_admin_users_username (username),
   UNIQUE KEY uq_admin_users_email (email),
   KEY idx_admin_users_role_active (role, is_active),
   KEY idx_admin_users_created_by (created_by)
@@ -55,7 +158,7 @@ SQL;
 
   try {
     db()->exec($sql);
-    return admin_users_table_exists();
+    return admin_ensure_users_schema();
   } catch (Throwable $e) {
     return false;
   }
@@ -63,6 +166,8 @@ SQL;
 
 function admin_active_user_count(): int {
   if (!admin_users_table_exists()) return 0;
+  admin_ensure_users_schema();
+
   try {
     $row = db()->query('SELECT COUNT(*) AS c FROM admin_users WHERE is_active = 1')->fetch();
     return (int)($row['c'] ?? 0);
@@ -85,14 +190,20 @@ function admin_current_user(): ?array {
 
   $u = $_SESSION['admin_user'];
   $id = (int)($u['id'] ?? 0);
-  $email = trim((string)($u['email'] ?? ''));
+  $email = strtolower(trim((string)($u['email'] ?? '')));
+  $username = admin_slug_username((string)($u['username'] ?? ''));
+  if ($username === '' && $email !== '') {
+    $username = admin_username_from_email($email);
+  }
+
   $fullName = trim((string)($u['full_name'] ?? ''));
   $role = admin_normalize_role((string)($u['role'] ?? 'editor'));
 
-  if ($id <= 0 || $email === '') return null;
+  if ($id <= 0 || ($username === '' && $email === '')) return null;
 
   return [
     'id' => $id,
+    'username' => $username,
     'email' => $email,
     'full_name' => $fullName,
     'role' => $role,
@@ -121,7 +232,11 @@ function admin_display_name(): string {
   if (is_array($u)) {
     $name = trim((string)($u['full_name'] ?? ''));
     if ($name !== '') return $name;
-    return (string)$u['email'];
+
+    $username = trim((string)($u['username'] ?? ''));
+    if ($username !== '') return $username;
+
+    return (string)($u['email'] ?? '');
   }
   return 'Owner';
 }
@@ -182,20 +297,21 @@ function admin_verify_password(string $password): bool {
   return false;
 }
 
-function admin_verify_user_credentials(string $email, string $password): ?array {
-  $email = strtolower(trim($email));
+function admin_verify_user_credentials(string $identifier, string $password): ?array {
+  $identifier = strtolower(trim($identifier));
   $password = trim($password);
-  if ($email === '' || $password === '') return null;
+  if ($identifier === '' || $password === '') return null;
   if (!admin_users_table_exists()) return null;
+  if (!admin_ensure_users_schema()) return null;
 
   try {
     $stmt = db()->prepare(
-      'SELECT id, full_name, email, role, password_hash, is_active
+      'SELECT id, full_name, username, email, role, password_hash, is_active
        FROM admin_users
-       WHERE email = :email
+       WHERE LOWER(email) = :identifier OR LOWER(username) = :identifier
        LIMIT 1'
     );
-    $stmt->execute([':email' => $email]);
+    $stmt->execute([':identifier' => $identifier]);
     $row = $stmt->fetch();
     if (!$row) return null;
     if ((int)($row['is_active'] ?? 0) !== 1) return null;
@@ -212,6 +328,7 @@ function admin_verify_user_credentials(string $email, string $password): ?array 
     return [
       'id' => (int)$row['id'],
       'full_name' => trim((string)($row['full_name'] ?? '')),
+      'username' => admin_slug_username((string)($row['username'] ?? '')),
       'email' => strtolower(trim((string)($row['email'] ?? ''))),
       'role' => admin_normalize_role((string)($row['role'] ?? 'editor')),
     ];
@@ -225,6 +342,7 @@ function admin_login_user(array $user): void {
   $_SESSION['admin_user'] = [
     'id' => (int)($user['id'] ?? 0),
     'full_name' => trim((string)($user['full_name'] ?? '')),
+    'username' => admin_slug_username((string)($user['username'] ?? '')),
     'email' => strtolower(trim((string)($user['email'] ?? ''))),
     'role' => admin_normalize_role((string)($user['role'] ?? 'editor')),
   ];
