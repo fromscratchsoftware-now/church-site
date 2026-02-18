@@ -72,6 +72,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   }
 
+  if ($action === 'toggle_publish') {
+    $id = (int)($_POST['id'] ?? 0);
+    $publish = (int)($_POST['publish'] ?? 0) === 1 ? 1 : 0;
+    if ($id > 0) {
+      $stmt = $pdo->prepare('UPDATE testimonials SET is_published = :publish WHERE id = :id');
+      $stmt->execute([
+        ':id' => $id,
+        ':publish' => $publish,
+      ]);
+      $_SESSION['flash'] = $publish === 1 ? 'Testimonial published.' : 'Testimonial unpublished.';
+    }
+    header('Location: testimonials.php');
+    exit;
+  }
+
   if ($action === 'delete') {
     $id = (int)($_POST['id'] ?? 0);
     if ($id > 0) {
@@ -179,6 +194,13 @@ $isEditing = is_array($editItem);
           <td><?= h(mb_substr((string)$r['quote'], 0, 140)) ?></td>
           <td>
             <a class="btn" href="testimonials.php?edit=<?= (int)$r['id'] ?>">Edit</a>
+            <form method="post" style="display:inline; margin-left:6px;">
+              <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
+              <input type="hidden" name="action" value="toggle_publish" />
+              <input type="hidden" name="id" value="<?= (int)$r['id'] ?>" />
+              <input type="hidden" name="publish" value="<?= (int)$r['is_published'] === 1 ? '0' : '1' ?>" />
+              <button class="btn" type="submit"><?= (int)$r['is_published'] === 1 ? 'Unpublish' : 'Publish' ?></button>
+            </form>
             <form method="post" style="display:inline; margin-left:6px;">
               <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
               <input type="hidden" name="action" value="delete" />
