@@ -77,6 +77,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     }
   }
+
+  if ($action === 'toggle_active') {
+    if (!admin_users_table_exists() || !admin_ensure_users_schema()) {
+      $error = 'User system is not ready.';
+    } else {
+      $id = (int)($_POST['id'] ?? 0);
+      $setActive = (int)($_POST['set_active'] ?? 0) === 1 ? 1 : 0;
+
+      if ($id <= 0) {
+        $error = 'Invalid user id.';
+      } else {
+        $targetStmt = db()->prepare('SELECT id, role, is_active FROM admin_users WHERE id = :id LIMIT 1');
+        $targetStmt->execute([':id' => $id]);
+        $target = $targetStmt->fetch();
+
+        if (!$target) {
+          $error = 'User not found.';
+        } else {
+          $current = admin_current_user();
+          $currentId = is_array($current) ? (int)($current['id'] ?? 0) : 0;
+
+          if ($setActive === 0 && $currentId > 0 && $currentId === (int)$target['id']) {
+            $error = 'You cannot deactivate your own account.';
+          } elseif (
+            $setActive === 0 &&
+            admin_normalize_role((string)$target['role']) === 'admin' &&
+            (int)$target['is_active'] === 1
+          ) {
+            $remainingStmt = db()->prepare(
+              'SELECT COUNT(*) AS c FROM admin_users WHERE role = :role AND is_active = 1 AND id <> :id'
+            );
+            $remainingStmt->execute([
+              ':role' => 'admin',
+              ':id' => (int)$target['id'],
+            ]);
+            $remaining = (int)(($remainingStmt->fetch()['c'] ?? 0));
+
+            if ($remaining < 1) {
+              $error = 'Cannot deactivate the last active admin.';
+            }
+          }
+
+          if ($error === '') {
+            $update = db()->prepare('UPDATE admin_users SET is_active = :is_active WHERE id = :id');
+            $update->execute([
+              ':is_active' => $setActive,
+              ':id' => (int)$target['id'],
+            ]);
+
+            $_SESSION['flash'] = $setActive === 1 ? 'User activated.' : 'User deactivated.';
+            header('Location: users.php');
+            exit;
+          }
+        }
+      }
+    }
+  }
 }
 
 $tableReady = admin_users_table_exists();
@@ -180,6 +237,7 @@ unset($_SESSION['flash']);
           <th>Status</th>
           <th>Last Login</th>
           <th>Created</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -193,6 +251,15 @@ unset($_SESSION['flash']);
             <td><?= (int)$r['is_active'] === 1 ? 'active' : 'inactive' ?></td>
             <td><?= h((string)($r['last_login_at'] ?? '')) ?></td>
             <td><?= h((string)$r['created_at']) ?></td>
+            <td>
+              <form method="post" style="display:inline;">
+                <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
+                <input type="hidden" name="action" value="toggle_active" />
+                <input type="hidden" name="id" value="<?= (int)$r['id'] ?>" />
+                <input type="hidden" name="set_active" value="<?= (int)$r['is_active'] === 1 ? '0' : '1' ?>" />
+                <button class="btn" type="submit"><?= (int)$r['is_active'] === 1 ? 'Deactivate' : 'Activate' ?></button>
+              </form>
+            </td>
           </tr>
         <?php endforeach; ?>
       </tbody>
