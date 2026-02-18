@@ -134,6 +134,92 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     }
   }
+
+  if ($action === 'change_role') {
+    if (!admin_users_table_exists() || !admin_ensure_users_schema()) {
+      $error = 'User system is not ready.';
+    } else {
+      $id = (int)($_POST['id'] ?? 0);
+      $newRole = admin_normalize_role((string)($_POST['role'] ?? 'editor'));
+
+      if ($id <= 0) {
+        $error = 'Invalid user id.';
+      } else {
+        $targetStmt = db()->prepare('SELECT id, role, is_active FROM admin_users WHERE id = :id LIMIT 1');
+        $targetStmt->execute([':id' => $id]);
+        $target = $targetStmt->fetch();
+
+        if (!$target) {
+          $error = 'User not found.';
+        } else {
+          $currentRole = admin_normalize_role((string)$target['role']);
+          $isActive = (int)$target['is_active'] === 1;
+
+          if ($currentRole === $newRole) {
+            $error = 'Role is already set.';
+          } elseif ($currentRole === 'admin' && $newRole === 'editor' && $isActive) {
+            $remainingStmt = db()->prepare(
+              'SELECT COUNT(*) AS c FROM admin_users WHERE role = :role AND is_active = 1 AND id <> :id'
+            );
+            $remainingStmt->execute([
+              ':role' => 'admin',
+              ':id' => (int)$target['id'],
+            ]);
+            $remaining = (int)(($remainingStmt->fetch()['c'] ?? 0));
+            if ($remaining < 1) {
+              $error = 'Cannot demote the last active admin.';
+            }
+          }
+
+          if ($error === '') {
+            $update = db()->prepare('UPDATE admin_users SET role = :role WHERE id = :id');
+            $update->execute([
+              ':role' => $newRole,
+              ':id' => (int)$target['id'],
+            ]);
+
+            $_SESSION['flash'] = 'User role updated to ' . $newRole . '.';
+            header('Location: users.php');
+            exit;
+          }
+        }
+      }
+    }
+  }
+
+  if ($action === 'reset_password') {
+    if (!admin_users_table_exists() || !admin_ensure_users_schema()) {
+      $error = 'User system is not ready.';
+    } else {
+      $id = (int)($_POST['id'] ?? 0);
+      $newPassword = (string)($_POST['new_password'] ?? '');
+
+      if ($id <= 0) {
+        $error = 'Invalid user id.';
+      } elseif (strlen($newPassword) < 8) {
+        $error = 'New password must be at least 8 characters.';
+      } else {
+        $targetStmt = db()->prepare('SELECT id FROM admin_users WHERE id = :id LIMIT 1');
+        $targetStmt->execute([':id' => $id]);
+        $target = $targetStmt->fetch();
+
+        if (!$target) {
+          $error = 'User not found.';
+        } else {
+          $hash = password_hash($newPassword, PASSWORD_DEFAULT);
+          $update = db()->prepare('UPDATE admin_users SET password_hash = :password_hash WHERE id = :id');
+          $update->execute([
+            ':password_hash' => $hash,
+            ':id' => $id,
+          ]);
+
+          $_SESSION['flash'] = 'Password reset successfully.';
+          header('Location: users.php');
+          exit;
+        }
+      }
+    }
+  }
 }
 
 $tableReady = admin_users_table_exists();
@@ -252,13 +338,34 @@ unset($_SESSION['flash']);
             <td><?= h((string)($r['last_login_at'] ?? '')) ?></td>
             <td><?= h((string)$r['created_at']) ?></td>
             <td>
-              <form method="post" style="display:inline;">
-                <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
-                <input type="hidden" name="action" value="toggle_active" />
-                <input type="hidden" name="id" value="<?= (int)$r['id'] ?>" />
-                <input type="hidden" name="set_active" value="<?= (int)$r['is_active'] === 1 ? '0' : '1' ?>" />
-                <button class="btn" type="submit"><?= (int)$r['is_active'] === 1 ? 'Deactivate' : 'Activate' ?></button>
-              </form>
+              <div style="display:flex; flex-direction:column; gap:8px; min-width:220px;">
+                <form method="post" style="display:flex; gap:6px; align-items:center;">
+                  <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
+                  <input type="hidden" name="action" value="toggle_active" />
+                  <input type="hidden" name="id" value="<?= (int)$r['id'] ?>" />
+                  <input type="hidden" name="set_active" value="<?= (int)$r['is_active'] === 1 ? '0' : '1' ?>" />
+                  <button class="btn" type="submit"><?= (int)$r['is_active'] === 1 ? 'Deactivate' : 'Activate' ?></button>
+                </form>
+
+                <form method="post" style="display:flex; gap:6px; align-items:center;">
+                  <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
+                  <input type="hidden" name="action" value="change_role" />
+                  <input type="hidden" name="id" value="<?= (int)$r['id'] ?>" />
+                  <select name="role" style="max-width:120px; padding:8px;">
+                    <option value="editor" <?= admin_normalize_role((string)$r['role']) === 'editor' ? 'selected' : '' ?>>Editor</option>
+                    <option value="admin" <?= admin_normalize_role((string)$r['role']) === 'admin' ? 'selected' : '' ?>>Admin</option>
+                  </select>
+                  <button class="btn" type="submit">Set Role</button>
+                </form>
+
+                <form method="post" style="display:flex; gap:6px; align-items:center;">
+                  <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
+                  <input type="hidden" name="action" value="reset_password" />
+                  <input type="hidden" name="id" value="<?= (int)$r['id'] ?>" />
+                  <input name="new_password" type="password" minlength="8" placeholder="New password" style="padding:8px;" required />
+                  <button class="btn" type="submit">Reset</button>
+                </form>
+              </div>
             </td>
           </tr>
         <?php endforeach; ?>
