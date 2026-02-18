@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   admin_verify_csrf();
   $action = (string)($_POST['action'] ?? '');
 
-  if ($action === 'create') {
+  if ($action === 'create' || $action === 'update') {
     $titleIn = trim((string)($_POST['title'] ?? ''));
     $category = trim((string)($_POST['category'] ?? ''));
     $location = trim((string)($_POST['location_name'] ?? ''));
@@ -23,22 +23,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       exit;
     }
 
-    $stmt = $pdo->prepare(
-      'INSERT INTO events (title, description, location_name, starts_at, image_url, category, registration_enabled, is_published)
-       VALUES (:title, :description, :location_name, :starts_at, :image_url, :category, 1, 1)'
-    );
-    $stmt->execute([
-      ':title' => $titleIn,
-      ':description' => $description !== '' ? $description : null,
-      ':location_name' => $location !== '' ? $location : null,
-      ':starts_at' => $startsAt !== '' ? $startsAt : null,
-      ':image_url' => $imageUrl !== '' ? $imageUrl : null,
-      ':category' => $category !== '' ? $category : null,
-    ]);
+    if ($action === 'create') {
+      $stmt = $pdo->prepare(
+        'INSERT INTO events (title, description, location_name, starts_at, image_url, category, registration_enabled, is_published)
+         VALUES (:title, :description, :location_name, :starts_at, :image_url, :category, 1, 1)'
+      );
+      $stmt->execute([
+        ':title' => $titleIn,
+        ':description' => $description !== '' ? $description : null,
+        ':location_name' => $location !== '' ? $location : null,
+        ':starts_at' => $startsAt !== '' ? $startsAt : null,
+        ':image_url' => $imageUrl !== '' ? $imageUrl : null,
+        ':category' => $category !== '' ? $category : null,
+      ]);
 
-    $_SESSION['flash'] = 'Event created.';
-    header('Location: events.php');
-    exit;
+      $_SESSION['flash'] = 'Event created.';
+      header('Location: events.php');
+      exit;
+    }
+
+    if ($action === 'update') {
+      $id = (int)($_POST['id'] ?? 0);
+      if ($id <= 0) {
+        $_SESSION['flash'] = 'Invalid event id.';
+        header('Location: events.php');
+        exit;
+      }
+
+      $stmt = $pdo->prepare(
+        'UPDATE events
+         SET title = :title,
+             description = :description,
+             location_name = :location_name,
+             starts_at = :starts_at,
+             image_url = :image_url,
+             category = :category
+         WHERE id = :id'
+      );
+      $stmt->execute([
+        ':id' => $id,
+        ':title' => $titleIn,
+        ':description' => $description !== '' ? $description : null,
+        ':location_name' => $location !== '' ? $location : null,
+        ':starts_at' => $startsAt !== '' ? $startsAt : null,
+        ':image_url' => $imageUrl !== '' ? $imageUrl : null,
+        ':category' => $category !== '' ? $category : null,
+      ]);
+
+      $_SESSION['flash'] = 'Event updated.';
+      header('Location: events.php');
+      exit;
+    }
   }
 
   if ($action === 'delete') {
@@ -53,6 +88,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
+$editId = (int)($_GET['edit'] ?? 0);
+$editItem = null;
+if ($editId > 0) {
+  $stmt = $pdo->prepare('SELECT id, title, description, location_name, starts_at, image_url, category FROM events WHERE id = :id LIMIT 1');
+  $stmt->execute([':id' => $editId]);
+  $editItem = $stmt->fetch() ?: null;
+}
+
 $rows = $pdo->query(
   'SELECT id, title, category, location_name, starts_at, is_published, created_at
    FROM events
@@ -63,6 +106,8 @@ $rows = $pdo->query(
 $csrf = admin_csrf_token();
 $flash = $_SESSION['flash'] ?? '';
 unset($_SESSION['flash']);
+
+$isEditing = is_array($editItem);
 ?>
 
 <h1 style="margin-top:0;">Events</h1>
@@ -72,39 +117,48 @@ unset($_SESSION['flash']);
 <?php endif; ?>
 
 <div class="card">
-  <h2 style="margin-top:0;">Create Event</h2>
+  <h2 style="margin-top:0;"><?= $isEditing ? ('Edit Event #' . (int)$editItem['id']) : 'Create Event' ?></h2>
   <form method="post">
     <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
-    <input type="hidden" name="action" value="create" />
+    <input type="hidden" name="action" value="<?= $isEditing ? 'update' : 'create' ?>" />
+    <?php if ($isEditing): ?>
+      <input type="hidden" name="id" value="<?= (int)$editItem['id'] ?>" />
+    <?php endif; ?>
+
     <div class="row">
       <div>
         <label class="muted">Title *</label>
-        <input name="title" required />
+        <input name="title" required value="<?= h((string)($editItem['title'] ?? '')) ?>" />
       </div>
       <div>
         <label class="muted">Category</label>
-        <input name="category" placeholder="Youth, Women, Outreach..." />
+        <input name="category" placeholder="Youth, Women, Outreach..." value="<?= h((string)($editItem['category'] ?? '')) ?>" />
       </div>
     </div>
     <div class="row">
       <div>
         <label class="muted">Location</label>
-        <input name="location_name" placeholder="Main Sanctuary" />
+        <input name="location_name" placeholder="Main Sanctuary" value="<?= h((string)($editItem['location_name'] ?? '')) ?>" />
       </div>
       <div>
         <label class="muted">Starts At (YYYY-MM-DD HH:MM:SS)</label>
-        <input name="starts_at" placeholder="2026-02-21 19:00:00" />
+        <input name="starts_at" placeholder="2026-02-21 19:00:00" value="<?= h((string)($editItem['starts_at'] ?? '')) ?>" />
       </div>
     </div>
     <div>
       <label class="muted">Image URL</label>
-      <input name="image_url" placeholder="https://images.unsplash.com/..." />
+      <input name="image_url" placeholder="https://images.unsplash.com/..." value="<?= h((string)($editItem['image_url'] ?? '')) ?>" />
     </div>
     <div>
       <label class="muted">Description</label>
-      <textarea name="description"></textarea>
+      <textarea name="description"><?= h((string)($editItem['description'] ?? '')) ?></textarea>
     </div>
-    <button class="btn primary" type="submit">Create</button>
+    <div class="row">
+      <button class="btn primary" type="submit"><?= $isEditing ? 'Update' : 'Create' ?></button>
+      <?php if ($isEditing): ?>
+        <a class="btn" href="events.php">Cancel</a>
+      <?php endif; ?>
+    </div>
   </form>
 </div>
 
@@ -132,7 +186,8 @@ unset($_SESSION['flash']);
           <td><?= h((string)($r['location_name'] ?? '')) ?></td>
           <td><?= (int)$r['is_published'] === 1 ? 'yes' : 'no' ?></td>
           <td>
-            <form method="post" style="display:inline;">
+            <a class="btn" href="events.php?edit=<?= (int)$r['id'] ?>">Edit</a>
+            <form method="post" style="display:inline; margin-left:6px;">
               <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
               <input type="hidden" name="action" value="delete" />
               <input type="hidden" name="id" value="<?= (int)$r['id'] ?>" />
@@ -146,4 +201,3 @@ unset($_SESSION['flash']);
 </div>
 
 <?php require_once __DIR__ . '/_layout_bottom.php'; ?>
-

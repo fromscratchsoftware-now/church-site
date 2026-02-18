@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   admin_verify_csrf();
   $action = (string)($_POST['action'] ?? '');
 
-  if ($action === 'create') {
+  if ($action === 'create' || $action === 'update') {
     $name = trim((string)($_POST['full_name'] ?? ''));
     $titleIn = trim((string)($_POST['title'] ?? ''));
     $quote = trim((string)($_POST['quote'] ?? ''));
@@ -22,21 +22,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       exit;
     }
 
-    $stmt = $pdo->prepare(
-      'INSERT INTO testimonials (full_name, title, quote, avatar_url, is_published, sort_order)
-       VALUES (:full_name, :title, :quote, :avatar_url, 1, :sort_order)'
-    );
-    $stmt->execute([
-      ':full_name' => $name,
-      ':title' => $titleIn !== '' ? $titleIn : null,
-      ':quote' => $quote,
-      ':avatar_url' => $avatar !== '' ? $avatar : null,
-      ':sort_order' => $sort,
-    ]);
+    if ($action === 'create') {
+      $stmt = $pdo->prepare(
+        'INSERT INTO testimonials (full_name, title, quote, avatar_url, is_published, sort_order)
+         VALUES (:full_name, :title, :quote, :avatar_url, 1, :sort_order)'
+      );
+      $stmt->execute([
+        ':full_name' => $name,
+        ':title' => $titleIn !== '' ? $titleIn : null,
+        ':quote' => $quote,
+        ':avatar_url' => $avatar !== '' ? $avatar : null,
+        ':sort_order' => $sort,
+      ]);
 
-    $_SESSION['flash'] = 'Testimonial created.';
-    header('Location: testimonials.php');
-    exit;
+      $_SESSION['flash'] = 'Testimonial created.';
+      header('Location: testimonials.php');
+      exit;
+    }
+
+    if ($action === 'update') {
+      $id = (int)($_POST['id'] ?? 0);
+      if ($id <= 0) {
+        $_SESSION['flash'] = 'Invalid testimonial id.';
+        header('Location: testimonials.php');
+        exit;
+      }
+
+      $stmt = $pdo->prepare(
+        'UPDATE testimonials
+         SET full_name = :full_name,
+             title = :title,
+             quote = :quote,
+             avatar_url = :avatar_url,
+             sort_order = :sort_order
+         WHERE id = :id'
+      );
+      $stmt->execute([
+        ':id' => $id,
+        ':full_name' => $name,
+        ':title' => $titleIn !== '' ? $titleIn : null,
+        ':quote' => $quote,
+        ':avatar_url' => $avatar !== '' ? $avatar : null,
+        ':sort_order' => $sort,
+      ]);
+
+      $_SESSION['flash'] = 'Testimonial updated.';
+      header('Location: testimonials.php');
+      exit;
+    }
   }
 
   if ($action === 'delete') {
@@ -51,6 +84,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 
+$editId = (int)($_GET['edit'] ?? 0);
+$editItem = null;
+if ($editId > 0) {
+  $stmt = $pdo->prepare('SELECT id, full_name, title, quote, avatar_url, sort_order FROM testimonials WHERE id = :id LIMIT 1');
+  $stmt->execute([':id' => $editId]);
+  $editItem = $stmt->fetch() ?: null;
+}
+
 $rows = $pdo->query(
   'SELECT id, full_name, title, quote, avatar_url, sort_order, is_published, created_at
    FROM testimonials
@@ -61,6 +102,8 @@ $rows = $pdo->query(
 $csrf = admin_csrf_token();
 $flash = $_SESSION['flash'] ?? '';
 unset($_SESSION['flash']);
+
+$isEditing = is_array($editItem);
 ?>
 
 <h1 style="margin-top:0;">Testimonials</h1>
@@ -70,35 +113,44 @@ unset($_SESSION['flash']);
 <?php endif; ?>
 
 <div class="card">
-  <h2 style="margin-top:0;">Create Testimonial</h2>
+  <h2 style="margin-top:0;"><?= $isEditing ? ('Edit Testimonial #' . (int)$editItem['id']) : 'Create Testimonial' ?></h2>
   <form method="post">
     <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
-    <input type="hidden" name="action" value="create" />
+    <input type="hidden" name="action" value="<?= $isEditing ? 'update' : 'create' ?>" />
+    <?php if ($isEditing): ?>
+      <input type="hidden" name="id" value="<?= (int)$editItem['id'] ?>" />
+    <?php endif; ?>
+
     <div class="row">
       <div>
         <label class="muted">Name *</label>
-        <input name="full_name" required />
+        <input name="full_name" required value="<?= h((string)($editItem['full_name'] ?? '')) ?>" />
       </div>
       <div>
         <label class="muted">Title/Role</label>
-        <input name="title" placeholder="Member since 2015" />
+        <input name="title" placeholder="Member since 2015" value="<?= h((string)($editItem['title'] ?? '')) ?>" />
       </div>
     </div>
     <div class="row">
       <div>
         <label class="muted">Avatar URL</label>
-        <input name="avatar_url" placeholder="https://images.unsplash.com/..." />
+        <input name="avatar_url" placeholder="https://images.unsplash.com/..." value="<?= h((string)($editItem['avatar_url'] ?? '')) ?>" />
       </div>
       <div>
         <label class="muted">Sort Order</label>
-        <input name="sort_order" type="number" value="0" />
+        <input name="sort_order" type="number" value="<?= h((string)($editItem['sort_order'] ?? '0')) ?>" />
       </div>
     </div>
     <div>
       <label class="muted">Quote *</label>
-      <textarea name="quote" required></textarea>
+      <textarea name="quote" required><?= h((string)($editItem['quote'] ?? '')) ?></textarea>
     </div>
-    <button class="btn primary" type="submit">Create</button>
+    <div class="row">
+      <button class="btn primary" type="submit"><?= $isEditing ? 'Update' : 'Create' ?></button>
+      <?php if ($isEditing): ?>
+        <a class="btn" href="testimonials.php">Cancel</a>
+      <?php endif; ?>
+    </div>
   </form>
 </div>
 
@@ -126,7 +178,8 @@ unset($_SESSION['flash']);
           <td><?= (int)$r['is_published'] === 1 ? 'yes' : 'no' ?></td>
           <td><?= h(mb_substr((string)$r['quote'], 0, 140)) ?></td>
           <td>
-            <form method="post" style="display:inline;">
+            <a class="btn" href="testimonials.php?edit=<?= (int)$r['id'] ?>">Edit</a>
+            <form method="post" style="display:inline; margin-left:6px;">
               <input type="hidden" name="csrf" value="<?= h($csrf) ?>" />
               <input type="hidden" name="action" value="delete" />
               <input type="hidden" name="id" value="<?= (int)$r['id'] ?>" />
@@ -140,4 +193,3 @@ unset($_SESSION['flash']);
 </div>
 
 <?php require_once __DIR__ . '/_layout_bottom.php'; ?>
-
